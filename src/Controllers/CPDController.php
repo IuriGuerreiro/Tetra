@@ -23,7 +23,7 @@ class CPDController {
      */
     public function getAll() {
         $query = "SELECT * FROM cpds ORDER BY created_at DESC";
-        $result = executeQuery($query, [], $this->pdo);
+        $result = executeQuery($query, []);
         
         if ($result['success']) {
             return $result['results'];
@@ -40,7 +40,7 @@ class CPDController {
      */
     public function getById($id) {
         $query = "SELECT * FROM cpds WHERE id = :id";
-        $result = executeQuery($query, [':id' => $id], $this->pdo);
+        $result = executeQuery($query, [':id' => $id]);
         
         if ($result['success'] && !empty($result['results'])) {
             return $result['results'][0];
@@ -95,7 +95,7 @@ class CPDController {
             ':registration_link' => $registrationLink
         ];
         
-        $result = executeQuery($query, $params, $this->pdo);
+        $result = executeQuery($query, $params);
         
         if ($result['success']) {
             return [
@@ -157,7 +157,7 @@ class CPDController {
             ':registration_link' => $registrationLink
         ];
         
-        $result = executeQuery($query, $params, $this->pdo);
+        $result = executeQuery($query, $params);
         
         if ($result['success']) {
             return [
@@ -188,7 +188,7 @@ class CPDController {
         }
 
         $query = "DELETE FROM cpds WHERE id = :id";
-        $result = executeQuery($query, [':id' => $id], $this->pdo);
+        $result = executeQuery($query, [':id' => $id]);
         
         if ($result['success'] && $result['affected_rows'] > 0) {
             return [
@@ -210,7 +210,7 @@ class CPDController {
      */
     public function getTotalCPDs() {
         $query = "SELECT COUNT(*) as total FROM cpds";
-        $result = executeQuery($query, [], $this->pdo);
+        $result = executeQuery($query, []);
         
         if ($result['success'] && !empty($result['results'])) {
             return (int)$result['results'][0]['total'];

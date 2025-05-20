@@ -1,0 +1,293 @@
+/* Reset and Base Styles */
+:root {
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --background-dark: #0f172a;
+    --background-light: #1e293b;
+    --text-light: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent-color: #3b82f6;
+    --card-background: #1e293b;
+    --card-hover: #2d3f5c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-light);
+    background: var(--background-dark);
+    padding-top: 80px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+/* Hero Section */
+.hero {
+    background: var(--background-light);
+    padding: 6rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.hero-text {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 1rem auto 0;
+    color: var(--text-muted);
+}
+
+/* Session Info */
+.session-info {
+    background: var(--card-background);
+    padding: 2rem;
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.session-info p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.session-info i {
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+}
+
+/* Upcoming Sessions */
+.upcoming-sessions {
+    padding: 4rem 0;
+    background: var(--background-dark);
+}
+
+.session-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.session-card {
+    background: var(--card-background);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.session-card:hover {
+    transform: translateY(-5px);
+    background: var(--card-hover);
+}
+
+.session-date {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.session-date i {
+    color: var(--accent-color);
+}
+
+.session-card h3 {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.session-card p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.session-details {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+}
+
+.session-details li {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.session-details i {
+    color: var(--accent-color);
+}
+
+.session-details strong {
+    color: var(--text-light);
+}
+
+/* Benefits Section */
+.benefits {
+    padding: 4rem 0;
+    background: #1a1a1a;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.benefit-card, .step {
+    text-align: center;
+    padding: 2rem;
+    background: #1a1a1a;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover, .step:hover {
+    transform: translateY(-5px);
+}
+
+/* Registration Steps */
+.registration-info {
+    padding: 4rem 0;
+    background: #111;
+}
+
+.registration-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.step {
+    background: #1a1a1a;
+    padding: 2rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.step h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 4rem 0;
+    background: #1a1a1a;
+    text-align: center;
+}
+
+.contact-section p {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--primary-dark);
+}
+
+.btn i {
+    font-size: 1rem;
+}
+
+/* Icon Styles */
+.fas {
+    color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    background: var(--background-light);
+    color: var(--text-muted);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .hero {
+        padding: 4rem 0;
+    }
+
+    .session-grid {
+        padding: 0 1rem;
+    }
+    
+    .benefits-grid,
+    .registration-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .session-card,
+    .benefit-card,
+    .step {
+        margin-bottom: 1rem;
+    }
+} 

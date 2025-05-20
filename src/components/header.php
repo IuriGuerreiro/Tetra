@@ -1,37 +1,51 @@
-<?php
-// Header of website
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level Academy - Inside Out Summer Camp 2025</title>
-  <link rel="stylesheet" href="./public/assets/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-<header>
-  <div class="container">
-    <nav>
-      <div class="logo">Level Academy</div>
-      <div class="menu">
-        <div class="dropdown">
-          <a href="../../index.php" class="dropbtn">Home</a>
-          <div class="dropdown-content">
-            <a href="#services">What We Do</a>
-            <a href="#courses">Offers</a>
-            <a href="#news">News</a>
-            <a href="#afkseries">AFK Series</a>
-            <a href="faculty.php">Faculty</a>
-            <a href="#contact">Contact</a>
-          </div>
+<link rel="stylesheet" href="../../public/assets/css/header.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Facebook SDK -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0" nonce="YOUR_NONCE"></script>
+
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="container">
+        <div class="social-links">
+            <a href="https://www.facebook.com/tetramalta" target="_blank" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+                <span>Follow us on Facebook</span>
+            </a>
+            <div class="fb-like" data-href="https://www.facebook.com/tetramalta" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
         </div>
-        <a href="tournamentslist.php">Tournaments</a>
-        <a href="articleslist.php">Articles</a>
-        <a href="insideout.php">Inside Out</a>
-      </div>
-    </nav>
-  </div>
-</header> 
+    </div>
+</div>
+
+<header class="main-header">
+    <div class="header-container">
+        <div class="logo">
+            <a href="/src/pages/home.php">
+                <h1>TETRA</h1>
+            </a>
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="./home.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'home.php' ? 'active' : ''; ?>">Home</a></li>
+                <li><a href="./cpds.php" class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'cpds.php' ? 'active' : ''; ?>">CPDs</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+    <ul class="mobile-nav-links">
+        <li><a href="/src/pages/home.php">Home</a></li>
+        <li><a href="/src/pages/cpds.php">CPDs</a></li>
+    </ul>
+</div>
+
+<script src="../../public/assets/js/header.js"></script> 

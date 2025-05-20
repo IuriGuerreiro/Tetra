@@ -1,0 +1,118 @@
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../images/home/edu-books.jpg') center/cover no-repeat;
+    color: white;
+    overflow: hidden;
+    padding: 2rem;
+    padding-top: 120px; /* Add padding to account for fixed header */
+}
+
+/* Dark overlay */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1;
+}
+
+/* Logo styling */
+.triangle-logo {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 60px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+/* Container for cycling phrases */
+.cycling-phrases {
+    position: relative;
+    z-index: 2;
+    height: 60px;
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Individual phrase styling */
+.phrase {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    letter-spacing: 4px;
+    font-weight: 300;
+    pointer-events: none;
+}
+
+.phrase h1 {
+    font-size: 2.5rem;
+    white-space: nowrap;
+    font-weight: 300;
+    letter-spacing: 8px;
+    margin: 0;
+    padding: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Active phrase */
+.phrase.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Dots container */
+.dots-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.dots-container .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dots-container .dot.active {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .phrase h1 {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+    
+    .cycling-phrases {
+        height: 50px;
+    }
+    
+    .triangle-logo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 40px;
+    }
+}

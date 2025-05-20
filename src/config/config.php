@@ -127,11 +127,6 @@ function getDatabaseConnection() {
         $salted_password = $salt . 'admin';
         $hashed_password = password_hash($salted_password, PASSWORD_BCRYPT);
         
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password, salt, role) 
-            SELECT 'Level Academy 1', 'levelacademy1@gmail.com', ?, ?, 'admin' 
-            WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'Level Academy 1')");
-        $stmt->execute([$hashed_password, $salt]);
-        
         $salt = bin2hex(random_bytes(16));
         $salted_password = $salt . 'admin';
         $hashed_password = password_hash($salted_password, PASSWORD_BCRYPT);

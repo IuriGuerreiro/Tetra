@@ -107,13 +107,17 @@ a:hover {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 26, 0.8)), 
-                url('../../images/hero-bg.jpg') center/cover no-repeat;
+    background: linear-gradient(135deg, 
+        rgba(17, 17, 17, 0.95), 
+        rgba(26, 26, 26, 0.98)
+    ), 
+    url('../../images/hero-bg.jpg') center/cover no-repeat;
     padding: 8rem 0;
     text-align: center;
     margin-bottom: 4rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 .hero::before {
@@ -123,7 +127,17 @@ a:hover {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, var(--base-silver), var(--highlight-white));
+    opacity: 0.8;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
 }
 
 .hero-content {

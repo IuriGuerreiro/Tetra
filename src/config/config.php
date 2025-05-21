@@ -81,22 +81,7 @@ function getDatabaseConnection() {
         require_once __DIR__ . '/../Controllers/User.php';
         $user = new User($pdo);
         
-        // Generate a new salt and hash the password 
-        //=================================================================================
-        //remove after 
-        $salt = bin2hex(random_bytes(16));
-        $salted_password = $salt . 'admin';
-        $hashed_password = password_hash($salted_password, PASSWORD_BCRYPT);
         
-        $salt = bin2hex(random_bytes(16));
-        $salted_password = $salt . 'admin';
-        $hashed_password = password_hash($salted_password, PASSWORD_BCRYPT);
-        
-        $stmt = $pdo->prepare("INSERT INTO users (username, email, password, salt, role) 
-            SELECT 'admin', 'admin@gmail.com', ?, ?, 'admin' 
-            WHERE NOT EXISTS (SELECT 1 FROM users WHERE username = 'admin')");
-        $stmt->execute([$hashed_password, $salt]);
-
         //=================================================================================
 
         return $pdo;

@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result['success']) {
         $_SESSION['success'] = $result['message'];
-        header('Location: cpds.php');
+        header('Location: cpdsList.php');
         exit();
     } else {
         $error = $result['message'];
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit" class="btn btn-primary">Update CPD</button>
-            <a href="index.php" class="btn btn-secondary">Back to Dashboard</a>
+            <a href="cpdsList.php" class="btn btn-secondary">Back to CPDs</a>
         </form>
     </div>
 

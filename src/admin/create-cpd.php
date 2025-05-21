@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result['success']) {
             $_SESSION['success'] = $result['message'];
-            header('Location: cpds.php');
+            header('Location: cpdsList.php');
             exit();
         } else {
             throw new Exception($result['message']);
@@ -222,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="content-header">
             <h2>Create New CPD</h2>
             <div class="actions">
-                <a href="cpds.php" class="btn btn-secondary">Back to CPDs</a>
+                <a href="cpdsList.php" class="btn btn-secondary">Back to CPDs</a>
             </div>
         </div>
 
@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="form-buttons">
                     <button type="submit" class="btn btn-primary">Create CPD</button>
-                    <a href="cpds.php" class="btn btn-secondary">Cancel</a>
+                    <a href="cpdsList.php" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

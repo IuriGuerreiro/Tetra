@@ -41,9 +41,11 @@ require_once 'includes/header.php';
 <div class="dashboard-section">
     <div class="section-header">
         <h3>CPDs Management</h3>
+        <?php if ($user->isAdmin()): ?>
         <a href="create-cpd.php" class="btn btn-primary">
             <i class="fas fa-plus"></i> Create New CPD
         </a>
+        <?php endif; ?>
     </div>
     
     <div class="cpd-grid">
@@ -66,6 +68,7 @@ require_once 'includes/header.php';
                             <span><i class="fas fa-calendar"></i> <?php echo date('M d, Y', strtotime($cpd['created_at'])); ?></span>
                         </div>
                         
+                        <?php if ($user->isAdmin()): ?>
                         <div class="cpd-actions">
                             <a href="edit-cpd.php?id=<?php echo $cpd['id']; ?>" class="btn btn-edit">
                                 <i class="fas fa-edit"></i> Edit
@@ -76,12 +79,13 @@ require_once 'includes/header.php';
                                 <i class="fas fa-trash"></i> Delete
                             </a>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
             <div class="no-cpds-message">
-                <p>No CPDs found. Click the "Create New CPD" button to add one.</p>
+                <p>No CPDs found. <?php if ($user->isAdmin()): ?>Click the "Create New CPD" button to add one.<?php endif; ?></p>
             </div>
         <?php endif; ?>
     </div>

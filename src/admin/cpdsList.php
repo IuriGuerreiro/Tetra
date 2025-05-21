@@ -8,7 +8,7 @@ require_once __DIR__ . '/../Controllers/User.php';
 $user = new User(getPDO());
 
 // Check if user is logged in and is admin
-if (!$user->isLoggedIn() || !$user->isAdmin()) {
+if (!$user->isLoggedIn()) {
     $_SESSION['error'] = 'You must be logged in as an admin to access this page';
     header('Location: login.php');
     exit();
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         } else {
             $_SESSION['error'] = $result['message'];
         }
-        header('Location: cpds.php');
+        header('Location: cpdsList.php');
         exit();
     } catch (Exception $e) {
         $_SESSION['error'] = $e->getMessage();
@@ -209,9 +209,11 @@ $cpds = $cpdController->getAll();
         <div class="page-header">
             <h1>Manage CPDs</h1>
             <div class="header-actions">
-                <a href="create-cpd.php" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Create New CPD
-                </a>
+                <?php if ($user->isAdmin()): ?>
+                    <a href="create-cpd.php" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Create New CPD
+                    </a>
+                <?php endif; ?>
                 <a href="logout.php" class="btn btn-danger">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
@@ -257,6 +259,7 @@ $cpds = $cpdController->getAll();
                                 <span><i class="fas fa-calendar"></i> <?php echo date('M d, Y', strtotime($cpd['created_at'])); ?></span>
                             </div>
 
+                            <?php if ($user->isAdmin()): ?>
                             <div class="cpd-actions">
                                 <a href="edit-cpd.php?id=<?php echo $cpd['id']; ?>" 
                                    class="btn btn-edit">
@@ -271,6 +274,7 @@ $cpds = $cpdController->getAll();
                                     </button>
                                 </form>
                             </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

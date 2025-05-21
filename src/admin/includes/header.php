@@ -214,7 +214,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
                 <li>
-                    <a href="cpds.php" class="<?php echo in_array($current_page, ['cpds.php', 'create-cpd.php', 'edit-cpd.php', 'delete-cpd.php']) ? 'active' : ''; ?>">
+                    <a href="cpdsList.php" class="<?php echo in_array($current_page, ['cpds.php', 'create-cpd.php', 'edit-cpd.php', 'delete-cpd.php']) ? 'active' : ''; ?>">
                         <i class="fas fa-graduation-cap"></i> CPDs
                     </a>
                 </li>

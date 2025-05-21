@@ -1,19 +1,13 @@
 <link rel="stylesheet" href="../../public/assets/css/header.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- Facebook SDK -->
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0" nonce="YOUR_NONCE"></script>
-
 <!-- Top Bar -->
 <div class="top-bar">
     <div class="container">
         <div class="social-links">
             <a href="https://www.facebook.com/tetramalta" target="_blank" class="social-link">
                 <i class="fab fa-facebook-f"></i>
-                <span>Follow us on Facebook</span>
             </a>
-            <div class="fb-like" data-href="https://www.facebook.com/tetramalta" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
         </div>
     </div>
 </div>

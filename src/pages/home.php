@@ -36,6 +36,7 @@ include '../components/header.php';
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../public/assets/css/home.css">
     <link rel="stylesheet" href="../../public/assets/css/hero.css">
+    <link rel="stylesheet" href="../../public/assets/css/animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Load only the Font Awesome icons we use -->
@@ -100,11 +101,11 @@ include '../components/header.php';
         <!-- ELT Section -->
         <section class="elt-section">
             <div class="container">
-                <h2>TEACHING ENGLISH IN MALTA</h2>
-                <p>The importance of the ELT segment to our tourism industry can perhaps be summed up by the fact that ELT attracts some 80,000 visitors to our islands every year, amounting to nearly 5% of total tourist arrivals to our islands.</p>
-                <p>Putting it simply – these visitors need teachers – and that is where we come in.</p>
+                <h2 class="animate-fade-in">TEACHING ENGLISH IN MALTA</h2>
+                <p class="animate-slide-up" data-delay="0.1">The importance of the ELT segment to our tourism industry can perhaps be summed up by the fact that ELT attracts some 80,000 visitors to our islands every year, amounting to nearly 5% of total tourist arrivals to our islands.</p>
+                <p class="animate-slide-up" data-delay="0.2">Putting it simply – these visitors need teachers – and that is where we come in.</p>
                 
-                <h3>What do I need to become an English teacher?</h3>
+                <h3 class="animate-slide-up" data-delay="0.3">What do I need to become an English teacher?</h3>
                 
                 <div class="requirements">
                     <div class="requirement-group">
@@ -136,11 +137,11 @@ include '../components/header.php';
             <div class="container">
                 <div class="tefl-content">
                     <div class="tefl-text">
-                        <h2>What is the TEFL induction certificate?</h2>
-                        <p>This is what you get when you successfully complete our 60-hour* TEFL Cert. Course. This is the course that teaches you how to teach the language. Many think that through this course you learn the details of the English language – the grammar, rules and bits and bobs of the language – this is where the many are wrong. We have another course for that.</p>
-                        <p>This is the fun one – this is the course that shows you how to engage and facilitate. Forget those boring lectures and lessons. Our sessions take on a workshop style where you, the candidate, are the main participant. We show you how to be the most effective, efficient, engaging and hands-on teacher that you can be.</p>
+                        <h2 class="animate-fade-in" data-delay="0.1">What is the TEFL induction certificate?</h2>
+                        <p class="animate-slide-right" data-delay="0.2">This is what you get when you successfully complete our 60-hour* TEFL Cert. Course. This is the course that teaches you how to teach the language. Many think that through this course you learn the details of the English language – the grammar, rules and bits and bobs of the language – this is where the many are wrong. We have another course for that.</p>
+                        <p class="animate-slide-right" data-delay="0.3">This is the fun one – this is the course that shows you how to engage and facilitate. Forget those boring lectures and lessons. Our sessions take on a workshop style where you, the candidate, are the main participant. We show you how to be the most effective, efficient, engaging and hands-on teacher that you can be.</p>
                     </div>
-                    <div class="tefl-image">
+                    <div class="tefl-image animate-zoom-in" data-delay="0.4">
                         <img src="../../public/assets/images/home/Certificate-of-Participation.jpg" alt="TEFL Certificate Sample" class="certificate-img">
                     </div>
                 </div>
@@ -175,26 +176,33 @@ include '../components/header.php';
         <!-- Services & CPD Section -->
         <section class="cpd-section">
             <div class="container">
-                <h2>Our Services</h2>
+                <h2 class="animate-fade-in">Our Services</h2>
                 <div class="cpd-content">
-                    <h3>CPD</h3>
-                    <h4>August 2023 CPD Sessions</h4>
-                    <p>This August TETRA will be delivering a series of online CPD sessions every Saturday morning between the 12th August and the 26th August. All sessions are approved by the ELT council and are accepted as part of your ELT permit requirements.</p>
-                    <h4>Game-Based Teaching: Engaging EFL Learners Through Play</h4>
-                    <a href="#" class="btn">Apply Now</a>
+                    <div class="animate-slide-up" data-delay="0.1">
+                        <h3>CPD</h3>
+                    </div>
+                    <div class="animate-slide-up" data-delay="0.2">
+                        <h4>August 2023 CPD Sessions</h4>
+                    </div>
+                    <div class="animate-slide-up" data-delay="0.3">
+                        <p>This August TETRA will be delivering a series of online CPD sessions every Saturday morning between the 12th August and the 26th August. All sessions are approved by the ELT council and are accepted as part of your ELT permit requirements.</p>
+                    </div>
+                    <div class="animate-slide-up" data-delay="0.4">
+                        <h4>Game-Based Teaching: Engaging EFL Learners Through Play</h4>
+                    </div>
+                    <div class="animate-slide-up" data-delay="0.5">
+                        <a href="#" class="btn pulse">Apply Now</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; Copyright 2022 - TETRA</p>
-        </div>
-    </footer>
-
+    <?php include '../components/footer.php'; ?>
+    
     <!-- Performance optimization script -->
     <script src="../../public/assets/js/hero.js"></script>
+    <script src="../../public/assets/js/scroll-animations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('loaded');

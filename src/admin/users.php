@@ -33,10 +33,81 @@ require_once __DIR__ . '/includes/header.php';
 
 <div class="content-header">
     <h2>Users Management</h2>
-    <a href="create-user.php" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Add New User
-    </a>
+    <div class="header-actions">
+        <a href="create-user.php" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add New User
+        </a>
+        <a href="logout.php" class="btn btn-danger">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
 </div>
+
+<style>
+    .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .content-header h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        color: #2c3e50;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        gap: 8px;
+    }
+
+    .btn i {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(255, 68, 68, 0.2);
+    }
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(255, 68, 68, 0.3);
+    }
+</style>
 
 <div class="card">
     <?php if (isset($error)): ?>

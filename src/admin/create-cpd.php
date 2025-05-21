@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new Exception('Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.');
             }
 
+            // Direct upload without curl
             $upload_dir = "../../public/assets/images/uploads/cpds/";
             
             // Create directory if it doesn't exist
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $upload_path = $upload_dir . $image_name;
 
             if (move_uploaded_file($file['tmp_name'], $upload_path)) {
-                $image_path = "assets/images/uploads/cpds/" . $image_name;
+                $image_path = "uploads/cpds/" . $image_name;
             } else {
                 throw new Exception('Failed to upload image.');
             }
@@ -145,12 +146,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             position: relative;
         }
 
+        .drop-zone {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #007bff;
+            background-color: #e9ecef;
+        }
+
+        .drop-zone-prompt {
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .drop-zone-prompt i {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
         .image-preview {
             margin-top: 10px;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            display: none;
+            text-align: center;
         }
 
         #preview-img {
@@ -224,10 +253,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group">
                     <label for="image">Image</label>
                     <div class="image-upload-container">
-                        <input type="file" id="image" name="image" class="form-control" 
-                               accept="image/jpeg,image/png,image/gif">
-                        <div class="image-preview">
-                            <img id="preview-img" src="" alt="Preview">
+                        <div class="drop-zone" id="dropZone">
+                            <div class="drop-zone-prompt">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drag & Drop your image here or click to browse</p>
+                            </div>
+                            <input type="file" id="image" name="image" class="form-control" accept="image/jpeg,image/png,image/gif" style="display: none;">
+                        </div>
+                        <div id="image-preview" class="image-preview">
+                            <img id="preview-img" src="" alt="Preview" style="display: none; max-width: 200px; max-height: 200px;">
                         </div>
                     </div>
                 </div>
@@ -250,21 +284,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include_once 'includes/footer.php'; ?>
 
     <script>
-        document.getElementById('image').addEventListener('change', function(e) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('image');
+        const previewImg = document.getElementById('preview-img');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop zone when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        // Handle click to upload
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Handle file selection
+        fileInput.addEventListener('change', handleFiles);
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dropZone.classList.add('dragover');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles({ target: { files: files } });
+        }
+
+        function handleFiles(e) {
             const file = e.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                const preview = document.querySelector('.image-preview');
-                const previewImg = document.getElementById('preview-img');
-
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-
-                reader.readAsDataURL(file);
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload an image file (JPG, PNG, or GIF)');
+                    fileInput.value = '';
+                }
             }
-        });
+        }
+    });
     </script>
 </body>
 </html> 

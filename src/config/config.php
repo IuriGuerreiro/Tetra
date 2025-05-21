@@ -78,45 +78,6 @@ function getDatabaseConnection() {
         // Mudar para a base de dados
         $pdo->exec("USE " . DB_NAME);
         
-        // Criar tabelas
-        $pdo->exec("CREATE TABLE IF NOT EXISTS users (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            username VARCHAR(50) NOT NULL UNIQUE,
-            email VARCHAR(100) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL,
-            salt VARCHAR(64) NOT NULL,
-            role ENUM('admin', 'user') DEFAULT 'user',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
-        
-        $pdo->exec("CREATE TABLE IF NOT EXISTS articles (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            title VARCHAR(255) NOT NULL,
-            content TEXT NOT NULL,
-            author VARCHAR(100) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
-        
-        $pdo->exec("CREATE TABLE IF NOT EXISTS podcasts (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            title VARCHAR(255) NOT NULL,
-            description TEXT NOT NULL,
-            youtube_link VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
-        
-        $pdo->exec("CREATE TABLE IF NOT EXISTS tournaments (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            title VARCHAR(255) NOT NULL,
-            description TEXT NOT NULL,
-            event_date DATE NOT NULL,
-            location VARCHAR(255) NOT NULL,
-            prize VARCHAR(100) NOT NULL,
-            entry_fee DECIMAL(10,2) NOT NULL,
-            registration_link VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )");
-        
         require_once __DIR__ . '/../Controllers/User.php';
         $user = new User($pdo);
         

@@ -51,7 +51,7 @@ require_once 'includes/header.php';
             <?php foreach ($cpds as $cpd): ?>
                 <div class="cpd-card">
                     <?php if ($cpd['image_path']): ?>
-                        <img src="<?php echo htmlspecialchars('../' . $cpd['image_path']); ?>" 
+                        <img src="../../public/assets/images/<?php echo htmlspecialchars($cpd['image_path']); ?>" 
                              alt="<?php echo htmlspecialchars($cpd['title']); ?>" 
                              class="cpd-thumbnail">
                     <?php endif; ?>
@@ -107,6 +107,73 @@ require_once 'includes/header.php';
         color: #7f8c8d;
         font-size: 1.1rem;
         line-height: 1.6;
+    }
+
+    /* Button Styles */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        gap: 8px;
+    }
+
+    .btn i {
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+    }
+
+    .btn-danger {
+        background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(255, 68, 68, 0.2);
+    }
+
+    .btn-danger:hover {
+        background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(255, 68, 68, 0.3);
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(33, 150, 243, 0.2);
+    }
+
+    .btn-edit:hover {
+        background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+        color: white;
+        box-shadow: 0 2px 4px rgba(244, 67, 54, 0.2);
+    }
+
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
     }
 
     /* CPD Section Styles */

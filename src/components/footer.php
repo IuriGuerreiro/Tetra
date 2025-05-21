@@ -3,7 +3,7 @@
 ?>
   <footer>
     <div class="container">
-      <p>&copy; 2025 Level Academy. All rights reserved.</p>
+      <p>&copy; 2025 TETRA. All rights reserved.</p>
     </div>
   </footer>
 

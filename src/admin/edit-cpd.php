@@ -36,25 +36,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle file upload
     $imagePath = $cpd['image_path']; // Keep existing image by default
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = __DIR__ . '/../uploads/cpds/';
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
+        $file = $_FILES['image'];
+        $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (!in_array($file_extension, $allowed_extensions)) {
+            throw new Exception('Invalid file type. Only JPG, JPEG, PNG, and GIF files are allowed.');
         }
+
+        // Direct upload without curl
+        $upload_dir = "../../public/assets/images/uploads/cpds/";
         
-        $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-        
-        if (in_array($fileExtension, $allowedExtensions)) {
-            $fileName = uniqid() . '.' . $fileExtension;
-            $uploadPath = $uploadDir . $fileName;
-            
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-                // Delete old image if exists
-                if ($cpd['image_path'] && file_exists(__DIR__ . '/../' . $cpd['image_path'])) {
-                    unlink(__DIR__ . '/../' . $cpd['image_path']);
-                }
-                $imagePath = 'uploads/cpds/' . $fileName;
+        // Create directory if it doesn't exist
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        $image_name = uniqid() . '_' . time() . '.' . $file_extension;
+        $upload_path = $upload_dir . $image_name;
+
+        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+            // Delete old image if exists
+            if ($cpd['image_path'] && file_exists(__DIR__ . '/../public/assets/images/' . $cpd['image_path'])) {
+                unlink(__DIR__ . '/../public/assets/images/' . $cpd['image_path']);
             }
+            $imagePath = "uploads/cpds/" . $image_name;
+        } else {
+            throw new Exception('Failed to upload image.');
         }
     }
 
@@ -119,14 +127,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="image">Image:</label>
-                <?php if ($cpd['image_path']): ?>
-                    <div class="current-image">
-                        <img src="<?php echo htmlspecialchars('../' . $cpd['image_path']); ?>" alt="Current CPD image" style="max-width: 200px;">
-                        <p>Current image</p>
+                <div class="image-upload-container">
+                    <?php if ($cpd['image_path']): ?>
+                        <div class="current-image">
+                            <img src="../../public/assets/images/<?php echo htmlspecialchars($cpd['image_path']); ?>" alt="Current CPD image" style="max-width: 200px;">
+                            <p>Current image</p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="drop-zone" id="dropZone">
+                        <div class="drop-zone-prompt">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & Drop your image here or click to browse</p>
+                        </div>
+                        <input type="file" id="image" name="image" accept="image/*" class="form-control" style="display: none;">
                     </div>
-                <?php endif; ?>
-                <input type="file" id="image" name="image" accept="image/*" class="form-control">
-                <small class="form-text text-muted">Leave empty to keep current image</small>
+                    <div id="image-preview" class="image-preview">
+                        <img id="preview-img" src="" alt="Preview" style="display: none; max-width: 200px; max-height: 200px;">
+                    </div>
+                    <small class="form-text text-muted">Leave empty to keep current image</small>
+                </div>
             </div>
 
             <div class="form-group">
@@ -141,5 +160,195 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <?php include_once 'includes/footer.php'; ?>
+
+    <style>
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .image-upload-container {
+        position: relative;
+    }
+
+    .drop-zone {
+        width: 100%;
+        height: 200px;
+        border: 2px dashed #ccc;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+        background-color: #f8f9fa;
+    }
+
+    .drop-zone:hover, .drop-zone.dragover {
+        border-color: #007bff;
+        background-color: #e9ecef;
+    }
+
+    .drop-zone-prompt {
+        text-align: center;
+        color: #6c757d;
+    }
+
+    .drop-zone-prompt i {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    .image-preview {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    #preview-img {
+        width: auto;
+        height: auto;
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: contain;
+    }
+
+    .current-image {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .current-image img {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 5px;
+        color: #6c757d;
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('image');
+        const previewImg = document.getElementById('preview-img');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop zone when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        // Handle click to upload
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Handle file selection
+        fileInput.addEventListener('change', handleFiles);
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dropZone.classList.add('dragover');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('dragover');
+        }
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles({ target: { files: files } });
+        }
+
+        function handleFiles(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        previewImg.src = e.target.result;
+                        previewImg.style.display = 'block';
+                        imagePreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload an image file (JPG, PNG, or GIF)');
+                    fileInput.value = '';
+                }
+            }
+        }
+    });
+    </script>
 </body>
 </html> 

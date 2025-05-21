@@ -201,19 +201,6 @@ $cpds = $cpdController->getAll();
                 </div>
             </div>
         </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section">
-            <div class="container">
-                <div class="contact-content animate-fade-in">
-                    <h2>Need More Information?</h2>
-                    <p class="animate-slide-up" data-delay="0.1">Contact us for any questions about our CPD sessions or custom training solutions.</p>
-                    <a href="mailto:info@tetra.edu.mt" class="btn pulse animate-slide-up" data-delay="0.2">
-                        <i class="fas fa-envelope"></i> Contact Us
-                    </a>
-                </div>
-            </div>
-        </section>
     </main>
 
     <?php include '../components/footer.php'; ?>

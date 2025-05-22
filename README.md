@@ -72,5 +72,5 @@ This project is proprietary and for internal use by the organization. Contact th
 ## How to change parameters of CPDs or whatelse it may be needed (DO NOT TRY THIS WITHOUT KNOWLEDGE)
 - Attetion This may destroy the website So make an backup
 - Get the edit, create, list and view of the thing you wanna change (its in Admin folder), get the migrations folder, trow it in the chatGpt and ask for it, get check everything related to the CPDs for example all the CPDs admin pages, then get the CPDs from the page folder and ask it to change it too!
- **Got errors**: get the page of it and put it in ChatGpt...
+ **Got errors**: get the page of it and the error and put it in ChatGpt...
 - Now you either broke everything, maybe its insecure but works, Or the Best way ALL WORKS !!!

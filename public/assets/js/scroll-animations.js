@@ -21,9 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     parseFloat(entry.target.dataset.delay) * 1000 : 0;
                 
                 // Apply the animation with the specified delay
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, delay);
+                entry.target.classList.add('visible');
                 
                 // Unobserve after animation completes to improve performance
                 observer.unobserve(entry.target);

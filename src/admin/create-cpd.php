@@ -61,6 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Check for forbidden characters (em dash)
+        $forbiddenPattern = '/[—]/u';
+        $fieldsToCheck = [
+            $title,
+            $course_rationale,
+            $course_objectives,
+            $learning_outcomes,
+            $course_procedures,
+            $assessment_procedure
+        ];
+        foreach ($fieldsToCheck as $field) {
+            if (preg_match($forbiddenPattern, $field)) {
+                throw new Exception('Your input contains forbidden characters (such as em dash —). Please use a regular dash (-) instead.');
+            }
+        }
+
         // Check if all required fields are filled
         if (!$title || !$duration_hours || !$course_rationale || !$course_objectives || 
             !$learning_outcomes || !$course_procedures || !$delivery_mode_id || !$assessment_procedure) {

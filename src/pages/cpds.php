@@ -33,10 +33,86 @@ $cpds = $cpdController->getAll();
             background: #111;
         }
         .loaded { opacity: 1; }
+        .cpd-detail-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 4px solid #00ff88;
+        }
+        .cpd-detail-section h4 {
+            margin: 0 0 0.5rem 0;
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .cpd-detail-section p, .cpd-detail-section ul {
+            margin: 0;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .cpd-detail-section ul {
+            padding-left: 1.2rem;
+        }
+        .cpd-detail-section li {
+            margin-bottom: 0.3rem;
+        }
+        .session-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,255,136,0.1);
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #00ff88;
+        }
+        .meta-item i {
+            font-size: 0.8rem;
+        }
+        .session-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .session-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0,255,136,0.2);
+        }
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .expandable-content.expanded {
+            max-height: 2000px;
+        }
+        .expand-btn {
+            background: rgba(0,255,136,0.1);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .expand-btn:hover {
+            background: rgba(0,255,136,0.2);
+        }
     </style>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../public/assets/css/cpds.css">
+    <link rel="stylesheet" href="../../public/assets/css/cpds-custom.css">
     <link rel="stylesheet" href="../../public/assets/css/hero.css">
     <link rel="stylesheet" href="../../public/assets/css/animations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -61,16 +137,15 @@ $cpds = $cpdController->getAll();
         <!-- Upcoming Sessions -->
         <section class="cpd-sessions">
             <div class="container">
-                <h2 class="section-title animate-fade-in">August 2025 CPD Sessions</h2>
+                <h2 class="section-title animate-fade-in">ELT Council Approved CPD Sessions</h2>
                 <div class="session-info animate-slide-up" data-delay="0.1">
                     <i class="fas fa-info-circle"></i>
-                    <p>This August TETRA will be delivering a series of online CPD sessions every Saturday morning between the 12th August and the 26th August. All sessions are approved by the ELT council and are accepted as part of your ELT permit requirements.</p>
+                    <p>TETRA delivers a comprehensive series of ELT Council-approved CPD sessions designed to enhance your teaching practice. All sessions count towards your ELT permit requirements and feature expert facilitators with extensive experience in English language teaching.</p>
                 </div>
                 <div class="sessions-grid">
                     <?php if (!empty($cpds)): ?>
-                        <?php $delay = 0.2; ?>
                         <?php foreach ($cpds as $cpd): ?>
-                            <div class="session-card animate-slide-up" data-delay="<?php echo $delay; ?>">
+                            <div class="session-card animate-slide-up">
                                 <div class="session-card-inner">
                                     <?php if (!empty($cpd['image_path'])): ?>
                                         <div class="session-image">
@@ -83,33 +158,121 @@ $cpds = $cpdController->getAll();
                                             <h3><?php echo htmlspecialchars($cpd['title']); ?></h3>
                                         </div>
                                         
-                                        <p class="session-description"><?php echo htmlspecialchars($cpd['description']); ?></p>
-                                        
-                                        <?php if (isset($cpd['abstract'])): ?>
-                                            <div class="session-abstract">
-                                                <h4>About This Session</h4>
-                                                <p><?php echo htmlspecialchars($cpd['abstract']); ?></p>
+                                        <!-- Session Meta Information -->
+                                        <div class="session-meta">
+                                            <div class="meta-item">
+                                                <i class="fas fa-clock"></i>
+                                                <span><?php echo htmlspecialchars($cpd['duration_hours']); ?> hours</span>
+                                            </div>
+                                            <?php if (!empty($cpd['delivery_mode'])): ?>
+                                                <div class="meta-item">
+                                                    <i class="fas fa-chalkboard-teacher"></i>
+                                                    <span><?php echo htmlspecialchars($cpd['delivery_mode']); ?></span>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <!-- Course Rationale (Always visible) -->
+                                        <?php if (!empty($cpd['course_rationale'])): ?>
+                                            <div class="cpd-detail-section">
+                                                <h4><i class="fas fa-lightbulb"></i> Course Overview</h4>
+                                                <p><?php echo nl2br(htmlspecialchars(substr($cpd['course_rationale'], 0, 500))); ?><?php echo strlen($cpd['course_rationale']) > 500 ? '...' : ''; ?></p>
                                             </div>
                                         <?php endif; ?>
 
-                                        <?php if (isset($cpd['registration_link'])): ?>
-                                            <a href="<?php echo htmlspecialchars($cpd['registration_link']); ?>" class="btn pulse">
-                                                <i class="fas fa-sign-in-alt"></i> Register Now
-                                            </a>
-                                        <?php else: ?>
-                                            <a href="#" class="btn pulse">
-                                                <i class="fas fa-sign-in-alt"></i> Register Now
-                                            </a>
-                                        <?php endif; ?>
+                                        <!-- Expand button -->
+                                        <button class="expand-btn" onclick="toggleExpand(this)">
+                                            <i class="fas fa-chevron-down"></i> Show Full Details
+                                        </button>
+
+                                        <!-- Expandable Content -->
+                                        <div class="expandable-content">
+                                            <!-- Full Course Rationale -->
+                                            <?php if (!empty($cpd['course_rationale']) && strlen($cpd['course_rationale']) > 500): ?>
+                                                <div class="cpd-detail-section">
+                                                    <h4><i class="fas fa-lightbulb"></i> Full Course Rationale</h4>
+                                                    <p><?php echo nl2br(htmlspecialchars($cpd['course_rationale'])); ?></p>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Course Objectives -->
+                                            <?php if (!empty($cpd['course_objectives'])): ?>
+                                                <div class="cpd-detail-section">
+                                                    <h4><i class="fas fa-target"></i> Course Objectives</h4>
+                                                    <?php 
+                                                    $objectives = $cpd['course_objectives'];
+                                                    if (strpos($objectives, ';') !== false || strpos($objectives, '-') !== false) {
+                                                        // If contains semicolons or dashes, treat as list
+                                                        $items = preg_split('/[;\-]\s*/', $objectives);
+                                                        echo '<ul>';
+                                                        foreach ($items as $item) {
+                                                            $item = trim($item);
+                                                            if (!empty($item)) {
+                                                                echo '<li>' . htmlspecialchars($item) . '</li>';
+                                                            }
+                                                        }
+                                                        echo '</ul>';
+                                                    } else {
+                                                        echo '<p>' . nl2br(htmlspecialchars($objectives)) . '</p>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Learning Outcomes -->
+                                            <?php if (!empty($cpd['learning_outcomes'])): ?>
+                                                <div class="cpd-detail-section">
+                                                    <h4><i class="fas fa-graduation-cap"></i> Learning Outcomes</h4>
+                                                    <?php 
+                                                    $outcomes = $cpd['learning_outcomes'];
+                                                    if (strpos($outcomes, ';') !== false || strpos($outcomes, '-') !== false) {
+                                                        // If contains semicolons or dashes, treat as list
+                                                        $items = preg_split('/[;\-]\s*/', $outcomes);
+                                                        echo '<ul>';
+                                                        foreach ($items as $item) {
+                                                            $item = trim($item);
+                                                            if (!empty($item)) {
+                                                                echo '<li>' . htmlspecialchars($item) . '</li>';
+                                                            }
+                                                        }
+                                                        echo '</ul>';
+                                                    } else {
+                                                        echo '<p>' . nl2br(htmlspecialchars($outcomes)) . '</p>';
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Course Procedures -->
+                                            <?php if (!empty($cpd['course_procedures'])): ?>
+                                                <div class="cpd-detail-section">
+                                                    <h4><i class="fas fa-tasks"></i> Course Procedures</h4>
+                                                    <p><?php echo nl2br(htmlspecialchars($cpd['course_procedures'])); ?></p>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Assessment Procedure -->
+                                            <?php if (!empty($cpd['assessment_procedure'])): ?>
+                                                <div class="cpd-detail-section">
+                                                    <h4><i class="fas fa-clipboard-check"></i> Assessment Procedure</h4>
+                                                    <p><?php echo nl2br(htmlspecialchars($cpd['assessment_procedure'])); ?></p>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <!-- More Details Button -->
+                                        <a class="details-btn" href="view-cpd.php?id=<?php echo urlencode($cpd['id']); ?>">
+                                            <i class="fas fa-arrow-right"></i> More Details
+                                        </a>
+
                                     </div>
                                 </div>
                             </div>
-                            <?php $delay += 0.1; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <div class="no-sessions animate-slide-up" data-delay="0.2">
                             <i class="fas fa-info-circle"></i>
-                            <p>No upcoming CPD sessions at the moment. Please check back later or contact us for more information.</p>
+                            <p>No CPD sessions currently loaded. Please contact us for information about upcoming sessions.</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -165,37 +328,41 @@ $cpds = $cpdController->getAll();
                                 <i class="fas fa-list-ul"></i>
                             </div>
                             <h3>Choose Your Session</h3>
-                            <p>Browse our upcoming sessions and select the one that matches your professional development needs.</p>
+                            <p>Browse our comprehensive CPD sessions and select those that match your professional development needs.</p>
                         </div>
                     </div>
                     <div class="step-card animate-slide-up" data-delay="0.2">
                         <div class="step-number">2</div>
                         <div class="step-content">
                             <div class="step-icon">
-                                <i class="fas fa-clipboard-list"></i>
+                                <i class="fas fa-handshake"></i>
                             </div>
-                            <h3>Complete Registration</h3>
-                            <p>Click the 'Register Now' button and fill in your details in our secure registration form.</p>
+                            <h3>Get in Touch</h3>
+                            <p>Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions or to express your interest in upcoming courses:</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> +356 99660124</p>
+                                <p><i class="fas fa-envelope"></i> <a href="mailto:info@tetra.com.mt">info@tetra.com.mt</a></p>
+                            </div>
                         </div>
                     </div>
                     <div class="step-card animate-slide-up" data-delay="0.3">
                         <div class="step-number">3</div>
                         <div class="step-content">
                             <div class="step-icon">
-                                <i class="fas fa-credit-card"></i>
+                                <i class="fas fa-calendar-alt"></i>
                             </div>
-                            <h3>Confirm Payment</h3>
-                            <p>Process your payment using our secure payment gateway.</p>
+                            <h3>Get Scheduled</h3>
+                            <p>We'll contact you with available dates and session details.</p>
                         </div>
                     </div>
                     <div class="step-card animate-slide-up" data-delay="0.4">
                         <div class="step-number">4</div>
                         <div class="step-content">
                             <div class="step-icon">
-                                <i class="fas fa-envelope"></i>
+                                <i class="fas fa-graduation-cap"></i>
                             </div>
-                            <h3>Receive Confirmation</h3>
-                            <p>Get your confirmation email with session details and access instructions.</p>
+                            <h3>Attend & Learn</h3>
+                            <p>Join the session and enhance your teaching skills with expert guidance.</p>
                         </div>
                     </div>
                 </div>
@@ -206,17 +373,30 @@ $cpds = $cpdController->getAll();
     <?php include '../components/footer.php'; ?>
 
     <!-- JavaScript -->
-    <script src="../../public/assets/js/scroll-animations.js"></script>
+    <script src="../../public/assets/js/cpd-animations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Add loaded class to body
             document.body.classList.add('loaded');
             
-            // Initialize scroll animations
-            if (typeof initScrollAnimations === 'function') {
-                initScrollAnimations();
+            // Initialize CPD-specific animations
+            if (typeof initCPDAnimations === 'function') {
+                initCPDAnimations();
             }
         });
+
+        function toggleExpand(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                button.innerHTML = '<i class="fas fa-chevron-down"></i> Show Full Details';
+            } else {
+                content.classList.add('expanded');
+                button.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Details';
+            }
+        }
     </script>
 </body>
 </html> 

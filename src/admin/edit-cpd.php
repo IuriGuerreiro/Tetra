@@ -69,26 +69,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Update CPD
-    $result = $cpdController->update(
-        $id,
+    // Check for forbidden characters (em dash)
+    $forbiddenPattern = '/[—]/u';
+    $fieldsToCheck = [
         $_POST['title'],
-        $_POST['duration_hours'],
         $_POST['course_rationale'],
         $_POST['course_objectives'],
         $_POST['learning_outcomes'],
         $_POST['course_procedures'],
-        $_POST['delivery_mode_id'],
-        $_POST['assessment_procedure'],
-        $imagePath
-    );
-
-    if ($result['success']) {
-        $_SESSION['success'] = $result['message'];
-        header('Location: cpdsList.php');
-        exit();
-    } else {
-        $error = $result['message'];
+        $_POST['assessment_procedure']
+    ];
+    foreach ($fieldsToCheck as $field) {
+        if (preg_match($forbiddenPattern, $field)) {
+            $error = 'Your input contains forbidden characters (such as em dash —). Please use a regular dash (-) instead.';
+            break;
+        }
+    }
+    if (!$error) {
+        // Update CPD
+        $result = $cpdController->update(
+            $id,
+            $_POST['title'],
+            $_POST['duration_hours'],
+            $_POST['course_rationale'],
+            $_POST['course_objectives'],
+            $_POST['learning_outcomes'],
+            $_POST['course_procedures'],
+            $_POST['delivery_mode_id'],
+            $_POST['assessment_procedure'],
+            $imagePath
+        );
+        if ($result['success']) {
+            $_SESSION['success'] = $result['message'];
+            header('Location: cpdsList.php');
+            exit();
+        } else {
+            $error = $result['message'];
+        }
     }
 }
 ?>

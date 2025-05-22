@@ -31,7 +31,10 @@ if (!$deliveryMode) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
 
-    if (empty($name)) {
+    // Check for forbidden characters (em dash)
+    if (preg_match('/[—]/u', $name)) {
+        $_SESSION['error'] = 'The name contains forbidden characters (such as em dash —). Please use a regular dash (-) instead.';
+    } else if (empty($name)) {
         $_SESSION['error'] = 'Name is required';
     } else {
         try {

@@ -8,6 +8,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../Controllers/User.php';
+require_once __DIR__ . '/../Controllers/DeliveryModeController.php';
 
 class CPDController {
     private $pdo;
@@ -22,7 +23,7 @@ class CPDController {
      * @return array Array of CPDs or error message
      */
     public function getAll() {
-        $query = "SELECT * FROM cpds ORDER BY created_at DESC";
+        $query = "SELECT cpds.*, delivery_modes.name AS delivery_mode FROM cpds LEFT JOIN delivery_modes ON cpds.delivery_mode_id = delivery_modes.id ORDER BY cpds.created_at DESC";
         $result = executeQuery($query, []);
         
         if ($result['success']) {
@@ -39,7 +40,7 @@ class CPDController {
      * @return array|false CPD data or false if not found
      */
     public function getById($id) {
-        $query = "SELECT * FROM cpds WHERE id = :id";
+        $query = "SELECT cpds.*, delivery_modes.name AS delivery_mode FROM cpds LEFT JOIN delivery_modes ON cpds.delivery_mode_id = delivery_modes.id WHERE cpds.id = :id";
         $result = executeQuery($query, [':id' => $id]);
         
         if ($result['success'] && !empty($result['results'])) {
@@ -53,50 +54,69 @@ class CPDController {
      * Create a new CPD
      * 
      * @param string $title CPD title
-     * @param string $description CPD description
-     * @param string $abstract CPD abstract
+     * @param int $duration_hours Duration in hours
+     * @param string $course_rationale Course rationale and content
+     * @param string $course_objectives Overall course objectives
+     * @param string $learning_outcomes Learning outcomes
+     * @param string $course_procedures Course procedures
+     * @param int $delivery_mode_id Mode of delivery
+     * @param string $assessment_procedure Assessment procedure
      * @param string|null $imagePath Path to the CPD image (optional)
-     * @param string $registrationLink Registration link for the CPD
      * @return array Result with success status and message
      */
-    public function create($title, $description, $abstract, $imagePath = null, $registrationLink) {
+    public function create($title, $duration_hours, $course_rationale, $course_objectives, $learning_outcomes, $course_procedures, $delivery_mode_id, $assessment_procedure, $imagePath = null) {
         // Ensure user is logged in and is admin
-
         $user = new User(GetPDO());
         if (!$user->isLoggedIn() || !$user->isAdmin()) {
             $_SESSION['error'] = 'You do not have permission to perform this action';
             header('Location: login.php');
             exit();
         }
-        
+        $deliveryModeController = new DeliveryModeController(GetPDO());
+        $deliveryMode = $deliveryModeController->getById($delivery_mode_id);
+        if (!$deliveryMode) {
+            return [
+                'success' => false,
+                'message' => 'Invalid delivery mode selected.'
+            ];
+        }
         $query = "INSERT INTO cpds (
             title, 
-            description, 
-            abstract, 
+            duration_hours,
+            course_rationale,
+            course_objectives,
+            learning_outcomes,
+            course_procedures,
+            delivery_mode_id,
+            assessment_procedure,
             image_path, 
-            registration_link,
             created_at,
             updated_at
         ) VALUES (
             :title, 
-            :description, 
-            :abstract, 
+            :duration_hours,
+            :course_rationale,
+            :course_objectives,
+            :learning_outcomes,
+            :course_procedures,
+            :delivery_mode_id,
+            :assessment_procedure,
             :image_path, 
-            :registration_link,
             CURRENT_TIMESTAMP,
             CURRENT_TIMESTAMP
         )";
-        
         $params = [
             ':title' => $title,
-            ':description' => $description,
-            ':abstract' => $abstract,
-            ':image_path' => $imagePath,
-            ':registration_link' => $registrationLink
+            ':duration_hours' => $duration_hours,
+            ':course_rationale' => $course_rationale,
+            ':course_objectives' => $course_objectives,
+            ':learning_outcomes' => $learning_outcomes,
+            ':course_procedures' => $course_procedures,
+            ':delivery_mode_id' => $delivery_mode_id,
+            ':assessment_procedure' => $assessment_procedure,
+            ':image_path' => $imagePath
         ];
-        
         $result = executeQuery($query, $params);
-        
         if ($result['success']) {
             return [
                 'success' => true,
@@ -104,7 +124,6 @@ class CPDController {
                 'message' => 'CPD created successfully'
             ];
         }
-        
         return [
             'success' => false,
             'message' => $result['error'] ?? 'Failed to create CPD'
@@ -116,13 +135,17 @@ class CPDController {
      * 
      * @param int $id CPD ID
      * @param string $title CPD title
-     * @param string $description CPD description
-     * @param string $abstract CPD abstract
+     * @param int $duration_hours Duration in hours
+     * @param string $course_rationale Course rationale and content
+     * @param string $course_objectives Overall course objectives
+     * @param string $learning_outcomes Learning outcomes
+     * @param string $course_procedures Course procedures
+     * @param int $delivery_mode_id Mode of delivery
+     * @param string $assessment_procedure Assessment procedure
      * @param string|null $imagePath Path to the CPD image (optional)
-     * @param string $registrationLink Registration link for the CPD
      * @return array Result with success status and message
      */
-    public function update($id, $title, $description, $abstract, $imagePath = null, $registrationLink) {
+    public function update($id, $title, $duration_hours, $course_rationale, $course_objectives, $learning_outcomes, $course_procedures, $delivery_mode_id, $assessment_procedure, $imagePath = null) {
         // Ensure user is logged in and is admin
         $user = new User(GetPDO());
         if (!$user->isLoggedIn() || !$user->isAdmin()) {
@@ -130,7 +153,6 @@ class CPDController {
             header('Location: login.php');
             exit();
         }
-        
         $existing = $this->getById($id);
         if (!$existing) {
             return [
@@ -138,34 +160,45 @@ class CPDController {
                 'message' => 'CPD not found'
             ];
         }
-        
+        $deliveryModeController = new DeliveryModeController(GetPDO());
+        $deliveryMode = $deliveryModeController->getById($delivery_mode_id);
+        if (!$deliveryMode) {
+            return [
+                'success' => false,
+                'message' => 'Invalid delivery mode selected.'
+            ];
+        }
         $query = "UPDATE cpds SET 
             title = :title,
-            description = :description,
-            abstract = :abstract,
+            duration_hours = :duration_hours,
+            course_rationale = :course_rationale,
+            course_objectives = :course_objectives,
+            learning_outcomes = :learning_outcomes,
+            course_procedures = :course_procedures,
+            delivery_mode_id = :delivery_mode_id,
+            assessment_procedure = :assessment_procedure,
             image_path = :image_path,
-            registration_link = :registration_link,
             updated_at = CURRENT_TIMESTAMP
             WHERE id = :id";
-            
         $params = [
             ':id' => $id,
             ':title' => $title,
-            ':description' => $description,
-            ':abstract' => $abstract,
-            ':image_path' => $imagePath,
-            ':registration_link' => $registrationLink
+            ':duration_hours' => $duration_hours,
+            ':course_rationale' => $course_rationale,
+            ':course_objectives' => $course_objectives,
+            ':learning_outcomes' => $learning_outcomes,
+            ':course_procedures' => $course_procedures,
+            ':delivery_mode_id' => $delivery_mode_id,
+            ':assessment_procedure' => $assessment_procedure,
+            ':image_path' => $imagePath
         ];
-        
         $result = executeQuery($query, $params);
-        
         if ($result['success']) {
             return [
                 'success' => true,
                 'message' => 'CPD updated successfully'
             ];
         }
-        
         return [
             'success' => false,
             'message' => $result['error'] ?? 'Failed to update CPD'

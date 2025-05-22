@@ -20,6 +20,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
 }
 
@@ -33,16 +34,23 @@
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
 }
 
+.triangle-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 /* Container for cycling phrases */
 .cycling-phrases {
     position: relative;
     z-index: 2;
-    height: 60px;
     width: 100%;
-    margin-bottom: 40px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 120px;
 }
 
 /* Individual phrase styling */
@@ -51,26 +59,37 @@
     width: 100%;
     text-align: center;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     letter-spacing: 4px;
     font-weight: 300;
     pointer-events: none;
+    transform: translateY(20px);
+    padding: 0 1rem;
 }
 
 .phrase h1 {
-    font-size: 2.5rem;
-    white-space: nowrap;
+    font-size: clamp(1.2rem, 3vw, 2.5rem);
+    white-space: normal;
     font-weight: 300;
     letter-spacing: 8px;
     margin: 0;
-    padding: 0;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    width: 100%;
+    word-break: break-word;
 }
 
 /* Active phrase */
 .phrase.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* Dots container */
@@ -97,20 +116,147 @@
     transform: scale(1.2);
 }
 
+/* Hero content for CPDs page */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-text {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 0 auto;
+}
+
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+    .hero {
+        min-height: 80vh;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .triangle-logo {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 40px;
+    }
+
     .phrase h1 {
-        font-size: 1.8rem;
-        letter-spacing: 4px;
+        font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+        letter-spacing: 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+        padding: 1.5rem;
     }
     
     .cycling-phrases {
-        height: 50px;
+        max-width: 95vw;
+        margin-bottom: 30px;
+    }
+    
+    .phrase {
+        padding: 0 0.5rem;
+    }
+    
+    .phrase h1 {
+        font-size: clamp(0.5rem, 1.2vw, 0.7rem);
+        letter-spacing: 2px;
+        letter-spacing: 4px;
     }
     
     .triangle-logo {
         width: 60px;
         height: 60px;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
+    }
+    
+    .dots-container {
+        gap: 8px;
+    }
+    
+    .dots-container .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        min-height: 50vh;
+        padding: 1rem;
+    }
+    
+    .cycling-phrases {
+        min-height: 80px;
+        margin-bottom: 20px;
+    }
+    
+    .phrase {
+        padding: 0 0.25rem;
+    }
+    
+    .phrase h1 {
+        letter-spacing: 2px;
+        font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+    }
+    
+    .triangle-logo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 20px;
+    }
+    
+    .dots-container {
+        gap: 6px;
+    }
+    
+    .dots-container .dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding: 1rem;
+    }
+    
+    .phrase h1 {
+        font-size: clamp(0.5rem, 1vw, 0.6rem);
+        letter-spacing: 2px;
+    }
+    
+    .cycling-phrases {
+        height: auto;
+        min-height: 30px;
+        margin-bottom: 15px;
+    }
+    
+    .triangle-logo {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 15px;
     }
 }

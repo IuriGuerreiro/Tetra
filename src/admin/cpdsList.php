@@ -200,6 +200,18 @@ $cpds = $cpdController->getAll();
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(255, 68, 68, 0.3);
         }
+
+        .btn-view {
+            background: linear-gradient(135deg, #00bcd4 0%, #0097a7 100%);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 188, 212, 0.2);
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(135deg, #0097a7 0%, #00796b 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 188, 212, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -252,15 +264,20 @@ $cpds = $cpdController->getAll();
                             <h4><?php echo htmlspecialchars($cpd['title']); ?></h4>
                             
                             <div class="cpd-description">
-                                <?php echo htmlspecialchars(substr($cpd['description'], 0, 100)) . '...'; ?>
+                                <?php echo htmlspecialchars(substr($cpd['course_rationale'], 0, 150)) . '...'; ?>
                             </div>
 
                             <div class="cpd-meta">
-                                <span><i class="fas fa-calendar"></i> <?php echo date('M d, Y', strtotime($cpd['created_at'])); ?></span>
+                                <span><i class="fas fa-clock"></i> <?php echo htmlspecialchars($cpd['duration_hours']); ?> hours</span>
+                                <span><i class="fas fa-chalkboard-teacher"></i> <?php echo htmlspecialchars($cpd['delivery_mode']); ?></span>
                             </div>
 
-                            <?php if ($user->isAdmin()): ?>
                             <div class="cpd-actions">
+                                <a href="view-cpd.php?id=<?php echo $cpd['id']; ?>" 
+                                   class="btn btn-view">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <?php if ($user->isAdmin()): ?>
                                 <a href="edit-cpd.php?id=<?php echo $cpd['id']; ?>" 
                                    class="btn btn-edit">
                                     <i class="fas fa-edit"></i> Edit
@@ -273,8 +290,8 @@ $cpds = $cpdController->getAll();
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </form>
+                                <?php endif; ?>
                             </div>
-                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

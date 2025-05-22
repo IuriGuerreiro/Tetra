@@ -218,6 +218,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <i class="fas fa-graduation-cap"></i> CPDs
                     </a>
                 </li>
+                <li>
+                    <a href="delivery-modes.php" class="<?php echo in_array($current_page, ['delivery-modes.php', 'create-delivery-mode.php', 'edit-delivery-mode.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-cogs"></i> Delivery Modes
+                    </a>
+                </li>
                 <?php if ($user->isLoggedIn() && $user->isAdmin()): ?>
                 <li>
                     <a href="users.php" class="<?php echo in_array($current_page, ['users.php', 'create-user.php', 'edit-user.php']) ? 'active' : ''; ?>">

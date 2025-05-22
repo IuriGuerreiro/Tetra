@@ -3,6 +3,7 @@ session_start();
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../Controllers/CPDController.php';
 require_once __DIR__ . '/../Controllers/User.php';
+require_once __DIR__ . '/../Controllers/DeliveryModeController.php';
 
 $user = new User(getPDO());
 
@@ -14,6 +15,8 @@ if (!$user->isLoggedIn() || !$user->isAdmin()) {
 }
 
 $cpdController = new CPDController(getPDO());
+$deliveryModeController = new DeliveryModeController(getPDO());
+$deliveryModes = $deliveryModeController->getAll();
 $error = '';
 $success = '';
 
@@ -21,9 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Validate and sanitize input
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-        $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-        $abstract = filter_input(INPUT_POST, 'abstract', FILTER_SANITIZE_STRING);
-        $registration_link = filter_input(INPUT_POST, 'registration_link', FILTER_SANITIZE_URL);
+        $duration_hours = filter_input(INPUT_POST, 'duration_hours', FILTER_VALIDATE_INT);
+        $course_rationale = filter_input(INPUT_POST, 'course_rationale', FILTER_SANITIZE_STRING);
+        $course_objectives = filter_input(INPUT_POST, 'course_objectives', FILTER_SANITIZE_STRING);
+        $learning_outcomes = filter_input(INPUT_POST, 'learning_outcomes', FILTER_SANITIZE_STRING);
+        $course_procedures = filter_input(INPUT_POST, 'course_procedures', FILTER_SANITIZE_STRING);
+        $delivery_mode_id = filter_input(INPUT_POST, 'delivery_mode_id', FILTER_VALIDATE_INT);
+        $assessment_procedure = filter_input(INPUT_POST, 'assessment_procedure', FILTER_SANITIZE_STRING);
         $image_path = null;
 
         // Handle image upload
@@ -55,17 +62,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Check if all required fields are filled
-        if (!$title || !$description || !$abstract || !$registration_link) {
+        if (!$title || !$duration_hours || !$course_rationale || !$course_objectives || 
+            !$learning_outcomes || !$course_procedures || !$delivery_mode_id || !$assessment_procedure) {
             throw new Exception('Please fill in all required fields');
         }
 
         // Create CPD
         $result = $cpdController->create(
             $title,
-            $description,
-            $abstract,
-            $image_path,
-            $registration_link
+            $duration_hours,
+            $course_rationale,
+            $course_objectives,
+            $learning_outcomes,
+            $course_procedures,
+            $delivery_mode_id,
+            $assessment_procedure,
+            $image_path
         );
 
         if ($result['success']) {
@@ -239,15 +251,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" required class="form-control" 
-                              placeholder="Enter CPD description"><?php echo isset($_POST['description']) ? htmlspecialchars($_POST['description']) : ''; ?></textarea>
+                    <label for="duration_hours">Duration (hours)</label>
+                    <input type="number" id="duration_hours" name="duration_hours" required class="form-control" 
+                           min="1" max="24" placeholder="Enter duration in hours" 
+                           value="<?php echo isset($_POST['duration_hours']) ? htmlspecialchars($_POST['duration_hours']) : ''; ?>">
                 </div>
 
                 <div class="form-group">
-                    <label for="abstract">Abstract</label>
-                    <textarea id="abstract" name="abstract" required class="form-control" 
-                              placeholder="Enter CPD abstract"><?php echo isset($_POST['abstract']) ? htmlspecialchars($_POST['abstract']) : ''; ?></textarea>
+                    <label for="course_rationale">Course Rationale and Content</label>
+                    <textarea id="course_rationale" name="course_rationale" required class="form-control" 
+                              placeholder="Enter course rationale and content"><?php echo isset($_POST['course_rationale']) ? htmlspecialchars($_POST['course_rationale']) : ''; ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="course_objectives">Course Objectives</label>
+                    <textarea id="course_objectives" name="course_objectives" required class="form-control" 
+                              placeholder="Enter course objectives"><?php echo isset($_POST['course_objectives']) ? htmlspecialchars($_POST['course_objectives']) : ''; ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="learning_outcomes">Learning Outcomes</label>
+                    <textarea id="learning_outcomes" name="learning_outcomes" required class="form-control" 
+                              placeholder="Enter learning outcomes"><?php echo isset($_POST['learning_outcomes']) ? htmlspecialchars($_POST['learning_outcomes']) : ''; ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="course_procedures">Course Procedures</label>
+                    <textarea id="course_procedures" name="course_procedures" required class="form-control" 
+                              placeholder="Enter course procedures"><?php echo isset($_POST['course_procedures']) ? htmlspecialchars($_POST['course_procedures']) : ''; ?></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery_mode_id">Delivery Mode</label>
+                    <select id="delivery_mode_id" name="delivery_mode_id" required class="form-control">
+                        <option value="">Select delivery mode</option>
+                        <?php foreach ($deliveryModes as $mode): ?>
+                            <option value="<?php echo $mode['id']; ?>" <?php echo (isset($_POST['delivery_mode_id']) && $_POST['delivery_mode_id'] == $mode['id']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($mode['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="assessment_procedure">Assessment Procedure</label>
+                    <textarea id="assessment_procedure" name="assessment_procedure" required class="form-control" 
+                              placeholder="Enter assessment procedure"><?php echo isset($_POST['assessment_procedure']) ? htmlspecialchars($_POST['assessment_procedure']) : ''; ?></textarea>
                 </div>
 
                 <div class="form-group">
@@ -264,13 +313,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <img id="preview-img" src="" alt="Preview" style="display: none; max-width: 200px; max-height: 200px;">
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="registration_link">Registration Link</label>
-                    <input type="url" id="registration_link" name="registration_link" required 
-                           class="form-control" placeholder="https://" 
-                           value="<?php echo isset($_POST['registration_link']) ? htmlspecialchars($_POST['registration_link']) : ''; ?>">
                 </div>
 
                 <div class="form-buttons">

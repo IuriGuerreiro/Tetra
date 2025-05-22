@@ -3,6 +3,7 @@ session_start();
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../Controllers/CPDController.php';
 require_once __DIR__ . '/../Controllers/User.php';
+require_once __DIR__ . '/../Controllers/DeliveryModeController.php';
 
 $user = new User(getPDO());
 
@@ -14,6 +15,8 @@ if (!$user->isLoggedIn() || !$user->isAdmin()) {
 }
 
 $cpdController = new CPDController(getPDO());
+$deliveryModeController = new DeliveryModeController(getPDO());
+$deliveryModes = $deliveryModeController->getAll();
 $error = '';
 $success = '';
 
@@ -70,10 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $cpdController->update(
         $id,
         $_POST['title'],
-        $_POST['description'],
-        $_POST['abstract'],
-        $imagePath,
-        $_POST['registration_link']
+        $_POST['duration_hours'],
+        $_POST['course_rationale'],
+        $_POST['course_objectives'],
+        $_POST['learning_outcomes'],
+        $_POST['course_procedures'],
+        $_POST['delivery_mode_id'],
+        $_POST['assessment_procedure'],
+        $imagePath
     );
 
     if ($result['success']) {
@@ -116,13 +123,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required class="form-control"><?php echo htmlspecialchars($cpd['description']); ?></textarea>
+                <label for="duration_hours">Duration (hours):</label>
+                <input type="number" id="duration_hours" name="duration_hours" required class="form-control" 
+                       min="1" max="24" value="<?php echo htmlspecialchars($cpd['duration_hours']); ?>">
             </div>
 
             <div class="form-group">
-                <label for="abstract">Abstract:</label>
-                <textarea id="abstract" name="abstract" required class="form-control"><?php echo htmlspecialchars($cpd['abstract']); ?></textarea>
+                <label for="course_rationale">Course Rationale and Content:</label>
+                <textarea id="course_rationale" name="course_rationale" required class="form-control"><?php echo htmlspecialchars($cpd['course_rationale']); ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="course_objectives">Course Objectives:</label>
+                <textarea id="course_objectives" name="course_objectives" required class="form-control"><?php echo htmlspecialchars($cpd['course_objectives']); ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="learning_outcomes">Learning Outcomes:</label>
+                <textarea id="learning_outcomes" name="learning_outcomes" required class="form-control"><?php echo htmlspecialchars($cpd['learning_outcomes']); ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="course_procedures">Course Procedures:</label>
+                <textarea id="course_procedures" name="course_procedures" required class="form-control"><?php echo htmlspecialchars($cpd['course_procedures']); ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="delivery_mode_id">Delivery Mode:</label>
+                <select id="delivery_mode_id" name="delivery_mode_id" required class="form-control">
+                    <option value="">Select delivery mode</option>
+                    <?php foreach ($deliveryModes as $mode): ?>
+                        <option value="<?php echo $mode['id']; ?>" <?php echo ($cpd['delivery_mode_id'] == $mode['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($mode['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="assessment_procedure">Assessment Procedure:</label>
+                <textarea id="assessment_procedure" name="assessment_procedure" required class="form-control"><?php echo htmlspecialchars($cpd['assessment_procedure']); ?></textarea>
             </div>
 
             <div class="form-group">
@@ -146,12 +186,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <small class="form-text text-muted">Leave empty to keep current image</small>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="registration_link">Registration Link:</label>
-                <input type="url" id="registration_link" name="registration_link" required class="form-control"
-                       value="<?php echo htmlspecialchars($cpd['registration_link']); ?>">
             </div>
 
             <button type="submit" class="btn btn-primary">Update CPD</button>

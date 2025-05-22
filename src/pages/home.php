@@ -36,6 +36,7 @@ include '../components/header.php';
     <link rel="stylesheet" href="../../public/assets/css/home.css">
     <link rel="stylesheet" href="../../public/assets/css/hero.css">
     <link rel="stylesheet" href="../../public/assets/css/animations.css">
+    <link rel="stylesheet" href="../../public/assets/css/Footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Load only the Font Awesome icons we use -->
@@ -178,19 +179,15 @@ include '../components/header.php';
                 <h2 class="animate-fade-in">Our Services</h2>
                 <div class="cpd-content">
                     <div class="animate-slide-up" data-delay="0.1">
-                        <h3>CPD</h3>
+                        <h3>Professional Development for English Language Educators</h3>
                     </div>
                     <div class="animate-slide-up" data-delay="0.2">
-                        <h4>August 2023 CPD Sessions</h4>
+                        <p>TETRA specializes in delivering ELT Council-approved CPD sessions designed to transform your teaching practice and advance your career in English language education.</p>
                     </div>
                     <div class="animate-slide-up" data-delay="0.3">
-                        <p>This August TETRA will be delivering a series of online CPD sessions every Saturday morning between the 12th August and the 26th August. All sessions are approved by the ELT council and are accepted as part of your ELT permit requirements.</p>
-                    </div>
-                    <div class="animate-slide-up" data-delay="0.4">
-                        <h4>Game-Based Teaching: Engaging EFL Learners Through Play</h4>
-                    </div>
-                    <div class="animate-slide-up" data-delay="0.5">
-                        <a href="#" class="btn pulse">Apply Now</a>
+                        <a href="cpds.php" class="cta-button">
+                            <i class="fas fa-graduation-cap"></i> Explore CPD Sessions
+                        </a>
                     </div>
                 </div>
             </div>

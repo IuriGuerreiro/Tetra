@@ -7,6 +7,8 @@
     --base-silver-light: #D3D3D3;
     --highlight-white: #FFFFFF;
     --highlight-glow: rgba(255, 255, 255, 0.2);
+    --accent-green: #00ff88;
+    --accent-green-glow: rgba(0, 255, 136, 0.2);
 }
 
 * {
@@ -220,10 +222,10 @@ h4 {
 .service-card:hover {
     transform: translateY(-3px);
     box-shadow: 
-        0 8px 16px rgba(192, 192, 192, 0.2),
-        0 0 0 1px rgba(192, 192, 192, 0.3),
-        0 0 20px rgba(192, 192, 192, 0.1);
-    border-color: var(--highlight-white);
+        0 8px 16px var(--accent-green-glow),
+        0 0 0 1px var(--accent-green),
+        0 0 20px var(--accent-green-glow);
+    border-color: var(--accent-green);
     background: rgba(26, 26, 26, 0.9);
 }
 
@@ -239,9 +241,9 @@ h4 {
 }
 
 .service-card:hover i {
-    color: var(--highlight-white);
+    color: var(--accent-green);
     transform: scale(1.2);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 10px var(--accent-green-glow));
 }
 
 .service-card h3 {
@@ -266,8 +268,8 @@ h4 {
 
 .service-card:hover h3,
 .service-card:hover p {
-    color: var(--highlight-white);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    color: var(--accent-green);
+    text-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 @media (max-width: 768px) {
@@ -341,10 +343,10 @@ h4 {
 .requirement-group:hover {
     transform: translateY(-3px);
     box-shadow: 
-        0 8px 16px rgba(192, 192, 192, 0.2),
-        0 0 0 1px rgba(192, 192, 192, 0.3),
-        0 0 20px rgba(192, 192, 192, 0.1);
-    border-color: var(--highlight-white);
+        0 8px 16px var(--accent-green-glow),
+        0 0 0 1px var(--accent-green),
+        0 0 20px var(--accent-green-glow);
+    border-color: var(--accent-green);
     background: rgba(26, 26, 26, 0.9);
 }
 
@@ -368,8 +370,8 @@ h4 {
 }
 
 .requirement-group:hover h4 {
-    color: var(--highlight-white);
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    color: var(--accent-green);
+    text-shadow: 0 0 20px var(--accent-green-glow);
 }
 
 .requirement-group ul {
@@ -384,8 +386,8 @@ h4 {
 }
 
 .requirement-group:hover li {
-    color: var(--highlight-white);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    color: var(--accent-green);
+    text-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 /* TEFL Section */
@@ -552,10 +554,10 @@ h4 {
 .stat-card:hover {
     transform: translateY(-3px);
     box-shadow: 
-        0 8px 16px rgba(192, 192, 192, 0.2),
-        0 0 0 1px rgba(192, 192, 192, 0.3),
-        0 0 20px rgba(192, 192, 192, 0.1);
-    border-color: var(--highlight-white);
+        0 8px 16px var(--accent-green-glow),
+        0 0 0 1px var(--accent-green),
+        0 0 20px var(--accent-green-glow);
+    border-color: var(--accent-green);
     background: rgba(26, 26, 26, 0.9);
 }
 
@@ -567,9 +569,9 @@ h4 {
 }
 
 .stat-card:hover i {
-    color: var(--highlight-white);
+    color: var(--accent-green);
     transform: scale(1.1);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 10px var(--accent-green-glow));
 }
 
 .stat-card h3 {
@@ -582,10 +584,10 @@ h4 {
 }
 
 .stat-card:hover h3 {
-    color: var(--highlight-white);
+    color: var(--accent-green);
     text-shadow: 
-        0 0 20px rgba(255, 255, 255, 0.3),
-        0 0 40px rgba(192, 192, 192, 0.2);
+        0 0 20px var(--accent-green-glow),
+        0 0 40px var(--accent-green-glow);
 }
 
 .stat-card p {
@@ -597,9 +599,9 @@ h4 {
 }
 
 .stat-card:hover p {
-    color: var(--highlight-white);
+    color: var(--accent-green);
     transform: translateY(-2px);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 @keyframes numberCount {
@@ -654,10 +656,10 @@ h4 {
 .cpd-content:hover {
     transform: translateY(-3px);
     box-shadow: 
-        0 8px 16px rgba(192, 192, 192, 0.2),
-        0 0 0 1px rgba(192, 192, 192, 0.3),
-        0 0 20px rgba(192, 192, 192, 0.1);
-    border-color: var(--highlight-white);
+        0 8px 16px var(--accent-green-glow),
+        0 0 0 1px var(--accent-green),
+        0 0 20px var(--accent-green-glow);
+    border-color: var(--accent-green);
     background: rgba(26, 26, 26, 0.9);
 }
 
@@ -678,8 +680,8 @@ h4 {
 .cpd-content:hover h3,
 .cpd-content:hover h4,
 .cpd-content:hover p {
-    color: var(--highlight-white);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    color: var(--accent-green);
+    text-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 .btn {
@@ -719,14 +721,6 @@ h4 {
         0 0 0 1px rgba(192, 192, 192, 0.3),
         0 0 20px rgba(192, 192, 192, 0.1);
     color: #000;
-}
-
-/* Footer */
-footer {
-    background: #000;
-    color: #fff;
-    padding: 2rem 0;
-    text-align: center;
 }
 
 /* Responsive Design */
@@ -771,4 +765,32 @@ footer {
 /* Contact section */
 .contact p {
     font-size: 25px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #00ff88;
+    color: #111;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.cta-button:hover {
+    background: transparent;
+    border-color: #00ff88;
+    color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,255,136,0.2);
+}
+
+.cta-button i {
+    font-size: 1.2rem;
 } 

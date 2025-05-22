@@ -262,3 +262,14 @@
         padding: 2rem;
     }
 }
+
+.session-card-inner {
+    position: relative;
+    z-index: 100;
+}
+
+/* Ensure navbar stays on top */
+.navbar {
+    position: relative;
+    z-index: 1000;
+}

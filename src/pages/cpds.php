@@ -14,10 +14,7 @@ $cpds = $cpdController->getAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPD Sessions - TETRA</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="../../public/assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="../../public/assets/css/cpds.css" as="style">

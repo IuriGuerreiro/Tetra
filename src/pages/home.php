@@ -14,8 +14,7 @@ include '../components/header.php';
     <title>TETRA - Teacher Training Academy</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../../public/assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="../../public/assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="../../public/assets/css/home.css" as="style">

@@ -194,12 +194,11 @@ a:hover {
 
 /* Session Cards */
 .session-card {
-    background: linear-gradient(135deg, var(--background-light) 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 1px solid #333;
+    transition: all 0.3s ease;
     border-radius: 12px;
     box-shadow: var(--shadow);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
     opacity: 0;
@@ -225,9 +224,9 @@ a:hover {
 }
 
 .session-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    border-color: #00ff88;
+    box-shadow: 0 10px 30px rgba(0,255,136,0.2);
 }
 
 .session-card:hover::before {
@@ -324,39 +323,23 @@ a:hover {
 /* CPD Specific Detail Sections */
 .cpd-detail-section {
     margin: 1.5rem 0;
-    padding: 1.2rem;
+    padding: 1rem;
     background: rgba(255,255,255,0.05);
-    border-radius: 10px;
-    border-left: 4px solid var(--accent-color);
-    transition: all 0.3s ease;
-}
-
-.cpd-detail-section:hover {
-    background: rgba(255,255,255,0.08);
-    border-left-width: 6px;
+    border-radius: 8px;
+    border-left: 4px solid #00ff88;
 }
 
 .cpd-detail-section h4 {
-    margin: 0 0 0.8rem 0;
-    color: var(--accent-color);
-    font-size: 1.1rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.cpd-detail-section h4 i {
+    margin: 0 0 0.5rem 0;
+    color: #00ff88;
     font-size: 1rem;
-    opacity: 0.8;
+    font-weight: 600;
 }
 
-.cpd-detail-section p, 
-.cpd-detail-section ul {
+.cpd-detail-section p, .cpd-detail-section ul {
     margin: 0;
-    line-height: 1.7;
+    line-height: 1.6;
     color: #ccc;
-    font-size: 0.95rem;
 }
 
 .cpd-detail-section ul {
@@ -364,15 +347,14 @@ a:hover {
 }
 
 .cpd-detail-section li {
-    margin-bottom: 0.4rem;
-    color: #ddd;
+    margin-bottom: 0.3rem;
 }
 
 /* Session Meta */
 .session-meta {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
 }
 
@@ -380,23 +362,20 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(0,255,136,0.15);
-    padding: 0.6rem 1rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    color: var(--accent-color);
-    font-weight: 500;
-    border: 1px solid rgba(0,255,136,0.3);
-    transition: all 0.3s ease;
+    background: rgba(0,255,136,0.1);
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #00ff88;
+}
+
+.meta-item i {
+    font-size: 0.8rem;
 }
 
 .meta-item:hover {
     background: rgba(0,255,136,0.25);
     transform: translateY(-1px);
-}
-
-.meta-item i {
-    font-size: 0.85rem;
 }
 
 /* Expandable Content */

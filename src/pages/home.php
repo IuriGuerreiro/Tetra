@@ -72,81 +72,6 @@ include '../components/header.php';
             </div>
         </section>
 
-        <!-- Services Section -->
-        <section class="services">
-            <div class="container">
-                <div class="service-card">
-                    <i class="fas fa-certificate fa-2x"></i>
-                    <h3>Provider Accreditation</h3>
-                    <p>We turn your training institute or department into a fully fledged accredited educational institution.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-award fa-2x"></i>
-                    <h3>Course Accreditation</h3>
-                    <p>We transform your certificates of attendance into internationally recognised certificates of achievement according to the European Qualifications Framework (EQF)</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-book-open fa-2x"></i>
-                    <h3>Materials and Content</h3>
-                    <p>We design and develop engaging content and materials for both facilitator and learner.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-chalkboard-teacher fa-2x"></i>
-                    <h3>Teacher Training</h3>
-                    <p>We train teachers to become facilitators to motivate students to become masters.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ELT Section -->
-        <section class="elt-section">
-            <div class="container">
-                <h2 class="animate-fade-in">TEACHING ENGLISH IN MALTA</h2>
-                <p class="animate-slide-up" data-delay="0.1">The importance of the ELT segment to our tourism industry can perhaps be summed up by the fact that ELT attracts some 80,000 visitors to our islands every year, amounting to nearly 5% of total tourist arrivals to our islands.</p>
-                <p class="animate-slide-up" data-delay="0.2">Putting it simply – these visitors need teachers – and that is where we come in.</p>
-                
-                <h3 class="animate-slide-up" data-delay="0.3">What do I need to become an English teacher?</h3>
-                
-                <div class="requirements">
-                    <div class="requirement-group">
-                        <h4>If you are under 21 years-old:</h4>
-                        <ul>
-                            <li>A TEFL induction certificate (approved by the ELT council)</li>
-                            <li>A pass in TELT or an A' Level in English (minimum grade C)</li>
-                            <li>A Pass in SEPTT</li>
-                            <li>A matriculation standard of education (42 points in your A-levels)</li>
-                            <li>A clean police conduct</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="requirement-group">
-                        <h4>If you are over 21 years-old:</h4>
-                        <ul>
-                            <li>A TEFL induction certificate (approved by the ELT council)</li>
-                            <li>A pass in TELT or an A' Level in English (minimum grade C)</li>
-                            <li>A pass in SEPTT</li>
-                            <li>A clean police conduct</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TEFL Section -->
-        <section class="tefl-section">
-            <div class="container">
-                <div class="tefl-content">
-                    <div class="tefl-text">
-                        <h2 class="animate-fade-in" data-delay="0.1">What is the TEFL induction certificate?</h2>
-                        <p class="animate-slide-right" data-delay="0.2">This is what you get when you successfully complete our 60-hour* TEFL Cert. Course. This is the course that teaches you how to teach the language. Many think that through this course you learn the details of the English language – the grammar, rules and bits and bobs of the language – this is where the many are wrong. We have another course for that.</p>
-                        <p class="animate-slide-right" data-delay="0.3">This is the fun one – this is the course that shows you how to engage and facilitate. Forget those boring lectures and lessons. Our sessions take on a workshop style where you, the candidate, are the main participant. We show you how to be the most effective, efficient, engaging and hands-on teacher that you can be.</p>
-                    </div>
-                    <div class="tefl-image animate-zoom-in" data-delay="0.4">
-                        <img src="../../public/assets/images/home/Certificate-of-Participation.jpg" alt="TEFL Certificate Sample" class="certificate-img">
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Stats Section -->
         <section class="stats">
             <div class="container">
@@ -173,27 +98,184 @@ include '../components/header.php';
             </div>
         </section>
 
-        <!-- Services & CPD Section -->
-        <section class="cpd-section">
+        <!-- Services Section -->
+        <section class="services">
             <div class="container">
-                <h2 class="animate-fade-in">Our Services</h2>
-                <div class="cpd-content">
-                    <div class="animate-slide-up" data-delay="0.1">
-                        <h3>Professional Development for English Language Educators</h3>
+                <h2 class="section-title">Our Services</h2>
+
+                <!-- Professional Development Card -->
+                <div class="service-card featured">
+                    <div class="service-header">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                        <div class="title-group">
+                            <h3>Professional Development for English Language Educators</h3>
+                        </div>
                     </div>
-                    <div class="animate-slide-up" data-delay="0.2">
-                        <p>TETRA specializes in delivering ELT Council-approved CPD sessions designed to transform your teaching practice and advance your career in English language education.</p>
+                    <div class="service-content">
+                        <div class="feature-item highlight">
+                            <i class="fas fa-star"></i>
+                            <span>TETRA specializes in delivering ELT Council-approved CPD sessions designed to transform your teaching practice and advance your career in English language education.</span>
+                        </div>
+                        
+                        <div class="cta-container">
+                            <a href="cpds.php" class="cta-button">
+                                <i class="fas fa-graduation-cap"></i>
+                                Explore CPD Sessions
+                            </a>
+                        </div>
                     </div>
-                    <div class="animate-slide-up" data-delay="0.3">
-                        <a href="cpds.php" class="cta-button">
-                            <i class="fas fa-graduation-cap"></i> Explore CPD Sessions
-                        </a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-certificate fa-2x"></i>
+                        <div class="title-group">
+                            <h3>PROVIDER ACCREDITATION PART A</h3>
+                            <span class="subtitle">Higher Education only</span>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="feature-item highlight">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Compilation of application form for Provider Accreditation</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Design and development of Business Plan with CSP</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-calculator"></i>
+                            <span>Financial Projections and Cash Flow planning</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-tasks"></i>
+                            <span>Reviews as requested by the MFHEA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-award fa-2x"></i>
+                        <div class="title-group">
+                            <h3>PROVIDER ACCREDITATION PART B</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="feature-item highlight">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Compilation of application form for Provider Accreditation</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Design and development of IQA Policy</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-search"></i>
+                            <span>Reviews as requested by the MFHEA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-book-open fa-2x"></i>
+                        <div class="title-group">
+                            <h3>COURSE DEVELOPMENT</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="feature-grid">
+                            <div class="feature-item highlight">
+                                <i class="fas fa-pencil-ruler"></i>
+                                <span>Work with the Academy in building and developing a range of courses in the desired areas</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-tasks"></i>
+                                <span>We will be responsible for ensuring course design is fit for purpose and meets both industry and vocational training requirements</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-list-ul"></i>
+                                <span>Each course will include learning hours, rationale, aims, entry requirements, unit descriptors, unit content, learning outcomes & assessment strategies</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-file-contract"></i>
+                                <span>Prepare and submit all the necessary documentation required by MFHEA for formal accreditation of programmes</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Assist in preparation of course content, teaching and student material</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-users fa-2x"></i>
+                        <div class="title-group">
+                            <h3>STAFF RECRUITMENT & DEVELOPMENT</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="feature-item highlight">
+                            <i class="fas fa-user-tie"></i>
+                            <span>Work with the Academy in training existing staff as well as staff recruitment & development, train the trainers and overall ensure the academic caliber of teaching staff</span>
+                        </div>
+                        <div class="feature-item highlight">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Liaising with staff on maintaining their CPD portfolio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-check-circle fa-2x"></i>
+                        <div class="title-group">
+                            <h3>QUALITY ASSURANCE</h3>
+                        </div>
+                    </div>
+                    <div class="service-content">
+                        <div class="qa-grid">
+                            <div class="feature-item highlight">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Developing and strengthening QA Policy</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-cogs"></i>
+                                <span>Managing all Internal and External Quality Assurance procedures</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-drafting-compass"></i>
+                                <span>Taking responsibility for design and approval of all programmes</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>Implementing student centered learning across teaching and assessment</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Registering students on programme of study ensuring entry requirements are met, recognition of prior learning and maintain student records through to certification</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-handshake"></i>
+                                <span>Coordinating with Internal Verifiers in making assessment decisions and liaising with External Verifiers in reaching final assessment decisions</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Ensuring Continuing Professional Development activities are carried out for teaching staff</span>
+                            </div>
+                            <div class="feature-item highlight">
+                                <i class="fas fa-clipboard-list"></i>
+                                <span>Carrying out necessary monitoring activities and programme reviews in liaison with key stakeholders</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
     <?php include '../components/footer.php'; ?>
     
     <!-- Performance optimization script -->
@@ -224,4 +306,5 @@ include '../components/header.php';
     </script>
 </body>
 </html>
+
 

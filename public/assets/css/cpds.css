@@ -34,13 +34,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    margin: 0;
-    opacity: 0;
-    transition: opacity .3s ease;
-}
-
-.loaded { 
-    opacity: 1; 
 }
 
 .container {
@@ -389,27 +382,37 @@ a:hover {
 .expandable-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .expandable-content.expanded {
-    max-height: 2000px;
+    max-height: 3000px;
 }
 
 .expand-btn {
     background: rgba(0,255,136,0.1);
-    color: #00ff88;
-    border: 1px solid #00ff88;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 0.85rem;
-    margin: 1rem 0;
+    font-size: 0.9rem;
+    margin: 1.2rem 0;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
 }
 
 .expand-btn:hover {
     background: rgba(0,255,136,0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,255,136,0.3);
+}
+
+.expand-btn i {
+    transition: transform 0.3s ease;
 }
 
 /* Session Abstract */

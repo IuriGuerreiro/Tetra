@@ -14,9 +14,6 @@ $cpds = $cpdController->getAll();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPD Sessions - TETRA</title>
-
-    <meta name="description" content="<meta name="description" content="Join TETRA's ELT Council-approved CPD sessions in Malta. Professional development for English teachers with expert facilitators, practical focus and interactive learning.">">
-
     <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
     
     <!-- Preload critical resources -->
@@ -24,6 +21,92 @@ $cpds = $cpdController->getAll();
     <link rel="preload" href="../../public/assets/css/hero.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     
+    <!-- Critical CSS -->
+    <style>
+        body { 
+            margin: 0;
+            opacity: 0;
+            transition: opacity .3s ease;
+            background: #111;
+        }
+        .loaded { opacity: 1; }
+        .cpd-detail-section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 4px solid #00ff88;
+        }
+        .cpd-detail-section h4 {
+            margin: 0 0 0.5rem 0;
+            color: #00ff88;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .cpd-detail-section p, .cpd-detail-section ul {
+            margin: 0;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .cpd-detail-section ul {
+            padding-left: 1.2rem;
+        }
+        .cpd-detail-section li {
+            margin-bottom: 0.3rem;
+        }
+        .session-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,255,136,0.1);
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #00ff88;
+        }
+        .meta-item i {
+            font-size: 0.8rem;
+        }
+        .session-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .session-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff88;
+            box-shadow: 0 10px 30px rgba(0,255,136,0.2);
+        }
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .expandable-content.expanded {
+            max-height: 2000px;
+        }
+        .expand-btn {
+            background: rgba(0,255,136,0.1);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .expand-btn:hover {
+            background: rgba(0,255,136,0.2);
+        }
+    </style>
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../public/assets/css/cpds.css">
     <link rel="stylesheet" href="../../public/assets/css/cpds-custom.css">

@@ -273,6 +273,12 @@ include '../components/header.php';
                         </div>
                     </div>
                 </div>
+                <div class="cta-container">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-22kC4X6Ks0p4f0e4IsunRcjDXXWi8vbHCz7GFTSThwuV1Q/viewform?usp=header" target="_blank" class="cta-button">
+                        <i class="fas fa-paper-plane"></i>
+                        Apply for Service
+                    </a>
+                </div>
             </div>
         </section>
     </main>

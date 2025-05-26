@@ -11,9 +11,11 @@ include '../components/header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TETRA - Teacher Training Academy</title>
+    <title>TETRA - Education Solution</title>
     
-    <!-- Favicon -->
+    <meta name="description" content="Professional teacher training and education solutions. TETRA provides CPD sessions, provider accreditation, course development and quality assurance services in Malta.">
+    
+    <!-- Favicon  that doesnt work for some reason-->
     <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
     
     <!-- Preload critical resources -->

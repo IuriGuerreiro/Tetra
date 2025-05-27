@@ -336,10 +336,13 @@ $cpds = $cpdController->getAll();
                                 <i class="fas fa-handshake"></i>
                             </div>
                             <h3>Get in Touch</h3>
-                            <p>Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions or to express your interest in upcoming courses:</p>
+                            <p>Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions.</p>
                             <div class="contact-info">
                                 <p><i class="fas fa-phone"></i> +356 99660124</p>
                                 <p><i class="fas fa-envelope"></i> <a href="mailto:info@tetra.com.mt">info@tetra.com.mt</a></p>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeU3CvyZ-Wh1lfE9i7LY_ka_wyzt0iAaABtu3nvJeT6Tyv8wg/viewform?usp=dialog" class="request-info-btn" target="_blank">
+                                    <i class="fas fa-info-circle"></i> Request Info
+                                </a>
                             </div>
                         </div>
                     </div>

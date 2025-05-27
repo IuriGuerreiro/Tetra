@@ -263,19 +263,61 @@ $cpd = $id ? $cpdController->getById($id) : null;
         </section>
     </main>
 
-    <section class="contact-section animate-slide-up" data-delay="0">
-        <div class="contact-title">Want to enroll? Contact us:</div>
-        <div class="contact-info">
-            <div class="contact-row">
-                <span class="contact-icon"><i class="fas fa-phone"></i></span>
-                <span>99660124</span>
+    <!-- Registration Steps -->
+    <section class="registration-steps">
+            <div class="container">
+                <h2 class="section-title animate-fade-in">How to Register</h2>
+                <div class="steps-grid">
+                    <div class="step-card animate-slide-up" data-delay="0.1">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-list-ul"></i>
+                            </div>
+                            <h3>Choose Your Session</h3>
+                            <p>Browse our comprehensive CPD sessions and select those that match your professional development needs.</p>
+                        </div>
+                    </div>
+                    <div class="step-card animate-slide-up" data-delay="0.2">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3>Get in Touch</h3>
+                            <p>Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions.</p>
+                            <div class="contact-info">
+                                <p><i class="fas fa-phone"></i> +356 99660124</p>
+                                <p><i class="fas fa-envelope"></i> <a href="mailto:info@tetra.com.mt">info@tetra.com.mt</a></p>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeU3CvyZ-Wh1lfE9i7LY_ka_wyzt0iAaABtu3nvJeT6Tyv8wg/viewform?usp=dialog" class="request-info-btn" target="_blank">
+                                    <i class="fas fa-info-circle"></i> Request Info
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-card animate-slide-up" data-delay="0.3">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>Get Scheduled</h3>
+                            <p>We'll contact you with available dates and session details.</p>
+                        </div>
+                    </div>
+                    <div class="step-card animate-slide-up" data-delay="0.4">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Attend & Learn</h3>
+                            <p>Join the session and enhance your teaching skills with expert guidance.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="contact-row">
-                <span class="contact-icon"><i class="fas fa-envelope"></i></span>
-                <a href="mailto:info@treta.com.mt">info@treta.com.mt</a>
-            </div>
-        </div>
-    </section>
+        </section>
     <?php include '../components/footer.php'; ?>
 
     <script src="../../public/assets/js/cpd-animations.js"></script>

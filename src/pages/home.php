@@ -74,43 +74,17 @@ include '../components/header.php';
             </div>
         </section>
 
-        <!-- Stats Section -->
-        <section class="stats">
-            <div class="container">
-                <div class="stat-card">
-                    <i class="fas fa-user-graduate fa-2x"></i>
-                    <h3>450</h3>
-                    <p>Teachers Trained</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-book fa-2x"></i>
-                    <h3>98</h3>
-                    <p>Courses Designed</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-star fa-2x"></i>
-                    <h3>10</h3>
-                    <p>Provider Accreditations</p>
-                </div>
-                <div class="stat-card">
-                    <i class="fas fa-clock fa-2x"></i>
-                    <h3>5000</h3>
-                    <p>CPD Hours Delivered</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Services Section -->
         <section class="services">
             <div class="container">
-                <h2 class="section-title">Our Services</h2>
+                <h2 class="section-title animate-fade-in">Our Services</h2>
 
                 <!-- Professional Development Card -->
                 <div class="service-card featured">
                     <div class="service-header">
                         <i class="fas fa-graduation-cap fa-2x"></i>
                         <div class="title-group">
-                            <h3>Professional Development for English Language Educators</h3>
+                            <h3>Professional Development for Educators</h3>
                         </div>
                     </div>
                     <div class="service-content">
@@ -127,7 +101,7 @@ include '../components/header.php';
                         </div>
                     </div>
                 </div>
-
+                <div class="section-subtitle animate-slide-up" data-delay="0.1">Further and Higher Education Accreditation Services</div>
                 <div class="service-card">
                     <div class="service-header">
                         <i class="fas fa-certificate fa-2x"></i>
@@ -155,7 +129,6 @@ include '../components/header.php';
                         </div>
                     </div>
                 </div>
-
                 <div class="service-card">
                     <div class="service-header">
                         <i class="fas fa-award fa-2x"></i>
@@ -280,6 +253,32 @@ include '../components/header.php';
                         <i class="fas fa-paper-plane"></i>
                         Apply for Service
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stat-card">
+                    <i class="fas fa-user-graduate fa-2x"></i>
+                    <h3>450</h3>
+                    <p>Teachers Trained</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-book fa-2x"></i>
+                    <h3>98</h3>
+                    <p>Courses Designed</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star fa-2x"></i>
+                    <h3>10</h3>
+                    <p>Provider Accreditations</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <h3>5000</h3>
+                    <p>CPD Hours Delivered</p>
                 </div>
             </div>
         </section>

@@ -51,6 +51,8 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
+
+
 h1 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
@@ -650,6 +652,27 @@ a:hover {
     color: var(--base-silver);
     margin: 1rem 0 0 0;
     flex-grow: 1;
+}
+
+/* Contact Info Button */
+.request-info-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-color);
+    color: var(--background-dark);
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.request-info-btn:hover {
+    background: #00cc6a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,255,136,0.3);
 }
 
 /* Animations */

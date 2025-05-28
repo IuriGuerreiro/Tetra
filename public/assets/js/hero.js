@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update phrases
         phrases.forEach((phrase, i) => {
             if (i === index) {
-                // Remove active class from all phrases first
-                phrases.forEach(p => p.classList.remove('active'));
+                // Remove active class and add transition classes
+                phrases.forEach(p => {
+                    p.classList.remove('active');
+                    p.classList.add('opacity-0', 'invisible', '-translate-y-5');
+                });
                 
-                // Add active class to current phrase
+                // Add active class to current phrase with slight delay for smooth transition
                 setTimeout(() => {
                     phrase.classList.add('active');
+                    phrase.classList.remove('opacity-0', 'invisible', '-translate-y-5');
                     isAnimating = false;
                 }, 50);
             }
@@ -28,9 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update dots
         dots.forEach((dot, i) => {
             if (i === index) {
-                dot.classList.add('active');
+                dot.classList.add('active', 'bg-white', 'scale-110');
+                dot.classList.remove('bg-white/30');
             } else {
-                dot.classList.remove('active');
+                dot.classList.remove('active', 'bg-white', 'scale-110');
+                dot.classList.add('bg-white/30');
             }
         });
     }
@@ -44,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Start automatic rotation
     function startRotation() {
-        interval = setInterval(nextPhrase, 4000); // Increased to 4 seconds for better readability
+        interval = setInterval(nextPhrase, 4000); // 4 seconds per phrase
     }
     
     // Handle dot clicks
@@ -61,6 +67,19 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Restart rotation
             startRotation();
+        });
+
+        // Add hover effect
+        dot.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('active')) {
+                this.classList.add('scale-110');
+            }
+        });
+
+        dot.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('active')) {
+                this.classList.remove('scale-110');
+            }
         });
     });
 

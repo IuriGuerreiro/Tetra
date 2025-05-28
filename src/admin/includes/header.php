@@ -219,6 +219,11 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     </a>
                 </li>
                 <li>
+                    <a href="subjectsList.php" class="<?php echo in_array($current_page, ['subjectsList.php', 'create-subject.php', 'edit-subject.php', 'view-subject.php']) ? 'active' : ''; ?>">
+                        <i class="fas fa-book"></i> Subjects
+                    </a>
+                </li>
+                <li>
                     <a href="delivery-modes.php" class="<?php echo in_array($current_page, ['delivery-modes.php', 'create-delivery-mode.php', 'edit-delivery-mode.php']) ? 'active' : ''; ?>">
                         <i class="fas fa-cogs"></i> Delivery Modes
                     </a>

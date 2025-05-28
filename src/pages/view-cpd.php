@@ -15,318 +15,281 @@ $cpd = $id ? $cpdController->getById($id) : null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View CPD Session - TETRA</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
-    <!-- Preload critical resources -->
-    <link rel="preload" href="../../public/assets/css/cpds.css" as="style">
-    <link rel="preload" href="../../public/assets/css/hero.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <!-- Critical CSS -->
-    <style>
-        body { 
-            margin: 0;
-            opacity: 0;
-            transition: opacity .3s ease;
-            background: #111;
+    <link rel="icon" type="image/png" href="https://tetra.com.mt/public/assets/images/favicon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tetra-green': '#00ff88',
+                        'tetra-dark': '#111',
+                        'tetra-gray': '#ccc',
+                        'tetra-border': '#333',
+                    },
+                    animation: {
+                        'fade-in': 'fade-in 0.6s ease-out forwards',
+                        'slide-up': 'slide-up 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'slide-up': {
+                            '0%': { 
+                                transform: 'translateY(20px)',
+                                opacity: '0'
+                            },
+                            '100%': { 
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            }
+                        }
+                    }
+                }
+            }
         }
-        .loaded { opacity: 1; }
-        .cpd-detail-section {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            border-left: 4px solid #00ff88;
-        }
-        .cpd-detail-section h4 {
-            margin: 0 0 0.5rem 0;
-            color: #00ff88;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        .cpd-detail-section p, .cpd-detail-section ul {
-            margin: 0;
-            line-height: 1.6;
-            color: #ccc;
-        }
-        .cpd-detail-section ul {
-            padding-left: 1.2rem;
-        }
-        .cpd-detail-section li {
-            margin-bottom: 0.3rem;
-        }
-        .session-meta {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0,255,136,0.1);
-            padding: 0.5rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: #00ff88;
-        }
-        .meta-item i {
-            font-size: 0.8rem;
-        }
-        .session-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-            margin: 2rem auto;
-            max-width: 1100px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,255,136,0.08);
-        }
-        .session-image img {
-            width: 100%;
-            max-height: 320px;
-            object-fit: cover;
-            border-radius: 12px 12px 0 0;
-        }
-        .session-content {
-            padding: 2.5rem 3.5rem;
-        }
-        .session-header h3 {
-            margin: 0 0 1rem 0;
-            color: #fff;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-        .contact-section {
-            margin: 2rem auto 6rem auto;
-            max-width: 1100px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            padding: 1.5rem 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            box-shadow: 0 4px 18px rgba(0,255,136,0.05);
-        }
-        .contact-title {
-            color: #00ff88;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.8rem;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-        .contact-row {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 1.1rem;
-            color: #ccc;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-        .contact-icon {
-            width: 2.2rem;
-            height: 2.2rem;
-            background: rgba(0,255,136,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00ff88;
-            font-size: 1.2rem;
-        }
-        .contact-row a {
-            color: #00ff88;
-            text-decoration: none;
-            font-weight: 600;
-            font-family: 'Inter', Arial, sans-serif;
-        }
-    </style>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../../public/assets/css/cpds.css">
-    <link rel="stylesheet" href="../../public/assets/css/hero.css">
-    <link rel="stylesheet" href="../../public/assets/css/animations.css">
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../public/assets/css/Footer.css">
 </head>
-<body>
+<body class="bg-tetra-dark text-tetra-gray font-['Inter'] opacity-0 transition-opacity duration-300" id="body">
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="triangle-logo">
-                <img src="../../public/assets/images/favicon.png" alt="TETRA Logo">
+        <section class="relative min-h-[50vh] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="../../public/assets/images/home/edu-books.jpg" alt="Education Background" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/60"></div>
             </div>
-            <div class="hero-content">
-                <h1 class="animate-fade-in">CPD Session Details</h1>
-                <p class="hero-text animate-slide-up">Explore the full details of this ELT Council-approved CPD session</p>
+            
+            <div class="relative z-10 w-20 h-20 mb-8 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.3)] animate-fade-in">
+                <img src="../../public/assets/images/favicon.png" alt="TETRA Logo" class="w-full h-full object-contain">
+            </div>
+            
+            <div class="relative z-10 text-center">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] leading-tight mb-4 text-white font-light tracking-wider animate-fade-in">
+                    CPD Session Details
+                </h1>
+                <p class="text-[clamp(1rem,2vw,1.2rem)] leading-relaxed text-white/90 animate-slide-up">
+                    Explore the full details of this ELT Council-approved CPD session
+                </p>
             </div>
         </section>
 
-        <section class="cpd-sessions">
-            <div class="container">
+        <section class="py-16">
+            <div class="container mx-auto px-4">
                 <?php if ($cpd): ?>
-                <div class="session-card animate-slide-up">
-                    <?php if (!empty($cpd['image_path'])): ?>
-                        <div class="session-image">
-                            <img src="../../public/assets/images/<?php echo htmlspecialchars($cpd['image_path']); ?>" alt="<?php echo htmlspecialchars($cpd['title']); ?>">
-                        </div>
-                    <?php endif; ?>
-                    <div class="session-content">
-                        <div class="session-header">
-                            <h3><?php echo htmlspecialchars($cpd['title']); ?></h3>
-                        </div>
-                        <div class="session-meta">
-                            <div class="meta-item">
-                                <i class="fas fa-clock"></i>
-                                <span><?php echo htmlspecialchars($cpd['duration_hours']); ?> hours</span>
-                            </div>
-                            <?php if (!empty($cpd['delivery_mode'])): ?>
-                                <div class="meta-item">
-                                    <i class="fas fa-chalkboard-teacher"></i>
-                                    <span><?php echo htmlspecialchars($cpd['delivery_mode']); ?></span>
+                    <div class="max-w-[1400px] mx-auto bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] rounded-xl border-2 border-tetra-border hover:border-tetra-green transition-all duration-300 shadow-[0_10px_30px_rgba(0,255,136,0.08)] animate-slide-up">
+                        <div class="flex flex-col lg:flex-row">
+                            <?php if (!empty($cpd['image_path'])): ?>
+                                <div class="lg:w-1/3">
+                                    <img src="../../public/assets/images/<?php echo htmlspecialchars($cpd['image_path']); ?>" 
+                                         alt="<?php echo htmlspecialchars($cpd['title']); ?>"
+                                         class="w-full h-full object-cover rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none">
                                 </div>
                             <?php endif; ?>
+                            
+                            <div class="flex-1 p-6 lg:p-10">
+                                <h3 class="text-3xl font-bold text-white mb-6">
+                                    <?php echo htmlspecialchars($cpd['title']); ?>
+                                </h3>
+                                
+                                <div class="flex flex-wrap gap-4 mb-8">
+                                    <div class="flex items-center gap-2 bg-[rgba(0,255,136,0.1)] px-4 py-2 rounded-full">
+                                        <i class="fas fa-clock text-tetra-green"></i>
+                                        <span class="text-tetra-green"><?php echo htmlspecialchars($cpd['duration_hours']); ?> hours</span>
+                                    </div>
+                                    <?php if (!empty($cpd['delivery_mode'])): ?>
+                                        <div class="flex items-center gap-2 bg-[rgba(0,255,136,0.1)] px-4 py-2 rounded-full">
+                                            <i class="fas fa-chalkboard-teacher text-tetra-green"></i>
+                                            <span class="text-tetra-green"><?php echo htmlspecialchars($cpd['delivery_mode']); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <?php if (!empty($cpd['course_rationale'])): ?>
+                                        <div class="bg-[rgba(255,255,255,0.05)] p-6 rounded-xl border-l-4 border-tetra-green">
+                                            <h4 class="text-tetra-green text-lg font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fas fa-lightbulb"></i> Course Overview
+                                            </h4>
+                                            <p class="text-tetra-gray leading-relaxed">
+                                                <?php echo nl2br(htmlspecialchars($cpd['course_rationale'])); ?>
+                                            </p>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($cpd['course_objectives'])): ?>
+                                        <div class="bg-[rgba(255,255,255,0.05)] p-6 rounded-xl border-l-4 border-tetra-green">
+                                            <h4 class="text-tetra-green text-lg font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fas fa-target"></i> Course Objectives
+                                            </h4>
+                                            <?php 
+                                            $objectives = $cpd['course_objectives'];
+                                            if (strpos($objectives, ';') !== false || strpos($objectives, '-') !== false) {
+                                                $items = preg_split('/[;\-]\s*/', $objectives);
+                                                echo '<ul class="list-disc pl-5 text-tetra-gray space-y-2">';
+                                                foreach ($items as $item) {
+                                                    $item = trim($item);
+                                                    if (!empty($item)) {
+                                                        echo '<li>' . htmlspecialchars($item) . '</li>';
+                                                    }
+                                                }
+                                                echo '</ul>';
+                                            } else {
+                                                echo '<p class="text-tetra-gray leading-relaxed">' . nl2br(htmlspecialchars($objectives)) . '</p>';
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($cpd['learning_outcomes'])): ?>
+                                        <div class="bg-[rgba(255,255,255,0.05)] p-6 rounded-xl border-l-4 border-tetra-green">
+                                            <h4 class="text-tetra-green text-lg font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fas fa-graduation-cap"></i> Learning Outcomes
+                                            </h4>
+                                            <?php 
+                                            $outcomes = $cpd['learning_outcomes'];
+                                            if (strpos($outcomes, ';') !== false || strpos($outcomes, '-') !== false) {
+                                                $items = preg_split('/[;\-]\s*/', $outcomes);
+                                                echo '<ul class="list-disc pl-5 text-tetra-gray space-y-2">';
+                                                foreach ($items as $item) {
+                                                    $item = trim($item);
+                                                    if (!empty($item)) {
+                                                        echo '<li>' . htmlspecialchars($item) . '</li>';
+                                                    }
+                                                }
+                                                echo '</ul>';
+                                            } else {
+                                                echo '<p class="text-tetra-gray leading-relaxed">' . nl2br(htmlspecialchars($outcomes)) . '</p>';
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($cpd['course_procedures'])): ?>
+                                        <div class="bg-[rgba(255,255,255,0.05)] p-6 rounded-xl border-l-4 border-tetra-green">
+                                            <h4 class="text-tetra-green text-lg font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fas fa-tasks"></i> Course Procedures
+                                            </h4>
+                                            <p class="text-tetra-gray leading-relaxed">
+                                                <?php echo nl2br(htmlspecialchars($cpd['course_procedures'])); ?>
+                                            </p>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($cpd['assessment_procedure'])): ?>
+                                        <div class="bg-[rgba(255,255,255,0.05)] p-6 rounded-xl border-l-4 border-tetra-green">
+                                            <h4 class="text-tetra-green text-lg font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fas fa-clipboard-check"></i> Assessment Procedure
+                                            </h4>
+                                            <p class="text-tetra-gray leading-relaxed">
+                                                <?php echo nl2br(htmlspecialchars($cpd['assessment_procedure'])); ?>
+                                            </p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
-                        <?php if (!empty($cpd['course_rationale'])): ?>
-                            <div class="cpd-detail-section">
-                                <h4><i class="fas fa-lightbulb"></i> Course Overview</h4>
-                                <p><?php echo nl2br(htmlspecialchars($cpd['course_rationale'])); ?></p>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($cpd['course_objectives'])): ?>
-                            <div class="cpd-detail-section">
-                                <h4><i class="fas fa-target"></i> Course Objectives</h4>
-                                <?php 
-                                $objectives = $cpd['course_objectives'];
-                                if (strpos($objectives, ';') !== false || strpos($objectives, '-') !== false) {
-                                    $items = preg_split('/[;\-]\s*/', $objectives);
-                                    echo '<ul>';
-                                    foreach ($items as $item) {
-                                        $item = trim($item);
-                                        if (!empty($item)) {
-                                            echo '<li>' . htmlspecialchars($item) . '</li>';
-                                        }
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    echo '<p>' . nl2br(htmlspecialchars($objectives)) . '</p>';
-                                }
-                                ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($cpd['learning_outcomes'])): ?>
-                            <div class="cpd-detail-section">
-                                <h4><i class="fas fa-graduation-cap"></i> Learning Outcomes</h4>
-                                <?php 
-                                $outcomes = $cpd['learning_outcomes'];
-                                if (strpos($outcomes, ';') !== false || strpos($outcomes, '-') !== false) {
-                                    $items = preg_split('/[;\-]\s*/', $outcomes);
-                                    echo '<ul>';
-                                    foreach ($items as $item) {
-                                        $item = trim($item);
-                                        if (!empty($item)) {
-                                            echo '<li>' . htmlspecialchars($item) . '</li>';
-                                        }
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    echo '<p>' . nl2br(htmlspecialchars($outcomes)) . '</p>';
-                                }
-                                ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($cpd['course_procedures'])): ?>
-                            <div class="cpd-detail-section">
-                                <h4><i class="fas fa-tasks"></i> Course Procedures</h4>
-                                <p><?php echo nl2br(htmlspecialchars($cpd['course_procedures'])); ?></p>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (!empty($cpd['assessment_procedure'])): ?>
-                            <div class="cpd-detail-section">
-                                <h4><i class="fas fa-clipboard-check"></i> Assessment Procedure</h4>
-                                <p><?php echo nl2br(htmlspecialchars($cpd['assessment_procedure'])); ?></p>
-                            </div>
-                        <?php endif; ?>
                     </div>
-                </div>
                 <?php else: ?>
-                    <div class="no-sessions animate-slide-up">
-                        <i class="fas fa-info-circle"></i>
-                        <p>No CPD session found.</p>
+                    <div class="max-w-[1400px] mx-auto bg-[rgba(0,255,136,0.1)] p-8 rounded-xl flex items-center justify-center gap-4 animate-slide-up">
+                        <i class="fas fa-info-circle text-3xl text-tetra-green"></i>
+                        <p class="text-tetra-gray text-xl">No CPD session found.</p>
                     </div>
                 <?php endif; ?>
             </div>
         </section>
-    </main>
 
-    <!-- Registration Steps -->
-    <section class="registration-steps">
-            <div class="container">
-                <h2 class="section-title animate-fade-in">How to Register</h2>
-                <div class="steps-grid">
-                    <div class="step-card animate-slide-up" data-delay="0.1">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <div class="step-icon">
-                                <i class="fas fa-list-ul"></i>
+        <!-- Registration Steps -->
+        <section class="py-16 bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d]">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center text-tetra-green mb-12 animate-fade-in">
+                    How to Register
+                </h2>
+                <div class="flex flex-col gap-8 max-w-[1400px] mx-auto">
+                    <!-- Step 1 -->
+                    <div class="bg-[rgba(255,255,255,0.05)] p-8 rounded-xl border border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] animate-slide-up relative">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-tetra-green rounded-full flex items-center justify-center text-tetra-dark font-bold">1</div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-list-ul text-3xl text-tetra-green"></i>
                             </div>
-                            <h3>Choose Your Session</h3>
-                            <p>Browse our comprehensive CPD sessions and select those that match your professional development needs.</p>
-                        </div>
-                    </div>
-                    <div class="step-card animate-slide-up" data-delay="0.2">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <div class="step-icon">
-                                <i class="fas fa-handshake"></i>
-                            </div>
-                            <h3>Get in Touch</h3>
-                            <p>Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions.</p>
-                            <div class="contact-info">
-                                <p><i class="fas fa-phone"></i> +356 99660124</p>
-                                <p><i class="fas fa-envelope"></i> <a href="mailto:info@tetra.com.mt">info@tetra.com.mt</a></p>
-                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeU3CvyZ-Wh1lfE9i7LY_ka_wyzt0iAaABtu3nvJeT6Tyv8wg/viewform?usp=dialog" class="request-info-btn" target="_blank">
-                                    <i class="fas fa-info-circle"></i> Request Info
-                                </a>
+                            <div>
+                                <h3 class="text-xl font-semibold text-tetra-green mb-3">Choose Your Session</h3>
+                                <p class="text-tetra-gray">Browse our comprehensive CPD sessions and select those that match your professional development needs.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="step-card animate-slide-up" data-delay="0.3">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <div class="step-icon">
-                                <i class="fas fa-calendar-alt"></i>
+
+                    <!-- Step 2 -->
+                    <div class="bg-[rgba(255,255,255,0.05)] p-8 rounded-xl border border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] animate-slide-up relative">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-tetra-green rounded-full flex items-center justify-center text-tetra-dark font-bold">2</div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-handshake text-3xl text-tetra-green"></i>
                             </div>
-                            <h3>Get Scheduled</h3>
-                            <p>We'll contact you with available dates and session details.</p>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-semibold text-tetra-green mb-3">Get in Touch</h3>
+                                <p class="text-tetra-gray mb-4">Ready to enhance your teaching skills? Contact us to learn more about our CPD sessions.</p>
+                                <div class="space-y-2">
+                                    <p class="text-tetra-gray"><i class="fas fa-phone mr-2 text-tetra-green"></i>+356 99660124</p>
+                                    <p class="text-tetra-gray"><i class="fas fa-envelope mr-2 text-tetra-green"></i><a href="mailto:info@tetra.com.mt" class="text-tetra-green hover:text-[#33ff9f]">info@tetra.com.mt</a></p>
+                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeU3CvyZ-Wh1lfE9i7LY_ka_wyzt0iAaABtu3nvJeT6Tyv8wg/viewform?usp=dialog" 
+                                       class="inline-block mt-3 px-4 py-2 bg-[rgba(0,255,136,0.1)] text-tetra-green rounded-full border border-tetra-green hover:bg-[rgba(0,255,136,0.2)] transition-all duration-300"
+                                       target="_blank">
+                                        <i class="fas fa-info-circle mr-2"></i>Request Info
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="step-card animate-slide-up" data-delay="0.4">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <div class="step-icon">
-                                <i class="fas fa-graduation-cap"></i>
+
+                    <!-- Step 3 -->
+                    <div class="bg-[rgba(255,255,255,0.05)] p-8 rounded-xl border border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] animate-slide-up relative">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-tetra-green rounded-full flex items-center justify-center text-tetra-dark font-bold">3</div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-calendar-alt text-3xl text-tetra-green"></i>
                             </div>
-                            <h3>Attend & Learn</h3>
-                            <p>Join the session and enhance your teaching skills with expert guidance.</p>
+                            <div>
+                                <h3 class="text-xl font-semibold text-tetra-green mb-3">Get Scheduled</h3>
+                                <p class="text-tetra-gray">We'll contact you with available dates and session details.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-[rgba(255,255,255,0.05)] p-8 rounded-xl border border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] animate-slide-up relative">
+                        <div class="absolute -top-4 -left-4 w-10 h-10 bg-tetra-green rounded-full flex items-center justify-center text-tetra-dark font-bold">4</div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-graduation-cap text-3xl text-tetra-green"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-tetra-green mb-3">Attend & Learn</h3>
+                                <p class="text-tetra-gray">Join the session and enhance your teaching skills with expert guidance.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+    </main>
+
     <?php include '../components/footer.php'; ?>
 
-    <script src="../../public/assets/js/cpd-animations.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.body.classList.add('loaded');
-            if (typeof initCPDAnimations === 'function') {
-                initCPDAnimations();
-            }
+            document.body.classList.add('opacity-100');
         });
     </script>
 </body>

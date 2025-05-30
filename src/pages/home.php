@@ -157,7 +157,7 @@ include '../components/header.php';
                     </div>
                 </div>
                 <h3 class="text-2xl font-semibold text-tetra-green text-center mb-12 opacity-0 transform translate-y-4 transition-all duration-500 animate-slide-up">Further and Higher Education Accreditation Services</h3>
-                
+
                 <!-- Provider Accreditation Part A -->
                 <div class="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] rounded-xl border-2 border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] p-10 mb-8">
                     <div class="flex items-center gap-6 pb-6 border-b border-tetra-border">
@@ -306,7 +306,7 @@ include '../components/header.php';
                         </div>
                     </div>
                 </div>
-                <div class="flex justify-center mt-12">
+                <div class="flex justify-center p-10 mb-8">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-22kC4X6Ks0p4f0e4IsunRcjDXXWi8vbHCz7GFTSThwuV1Q/viewform?usp=header" 
                        target="_blank" 
                        class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-transparent text-tetra-green border-2 border-tetra-green rounded-full hover:bg-[rgba(0,255,136,0.1)] transition-all duration-300 text-lg font-medium group transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)]">
@@ -314,7 +314,33 @@ include '../components/header.php';
                         <span>Apply for Service</span>
                     </a>
                 </div>
+
+                <!-- Erasmus KA1 Courses -->
+                <div class="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] rounded-xl border-2 border-tetra-border hover:border-tetra-green transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,255,136,0.2)] p-10 mb-8">
+                    <div class="flex items-center gap-6 pb-6 border-b border-tetra-border">
+                        <i class="fas fa-graduation-cap text-4xl text-tetra-green"></i>
+                        <div>
+                            <h3 class="text-3xl font-semibold text-white">Erasmus+ KA1 Courses</h3>
+                            <p class="text-tetra-green text-lg mt-2">Professional Development in Europe</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 space-y-6">
+                        <div class="bg-[rgba(0,255,136,0.1)] p-6 rounded-xl border-l-4 border-tetra-green flex items-start gap-4">
+                            <i class="fas fa-star text-tetra-green text-xl mt-1"></i>
+                            <span class="text-lg text-white">TETRA offers 12 Erasmus KA1 courses for educators in technology, media, and business with hands-on training and networking opportunities. Full support provided for Erasmus+ funding applications with training in Malta.</span>
+                        </div>
+                        
+                        <div class="flex justify-center mt-8">
+                            <a href="erasmusCourses.php" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent text-tetra-green border-2 border-tetra-green rounded-full hover:bg-[rgba(0,255,136,0.1)] transition-all duration-300 text-lg font-medium">
+                                <i class="fas fa-globe-europe"></i>
+                                Explore Erasmus+ Courses
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+                
         </section>
 
         <!-- Stats Section -->

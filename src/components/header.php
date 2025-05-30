@@ -72,6 +72,14 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                             Erasmus KA1 courses
                         </a>
                     </li>
+                    <li>
+                        <a href="./contactUs.php" 
+                           class="<?php echo $currentPage == 'contactUs.php' 
+                           ? 'text-tetra-green border-b-2 border-tetra-green' 
+                           : 'text-gray-300 hover:text-tetra-green'; ?> px-3 py-2 text-sm font-medium transition-colors duration-300">
+                            Contact Us
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
@@ -108,6 +116,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
                 <a href="/src/pages/erasmusCourses.php" 
                    class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-tetra-green hover:bg-gray-700 rounded-md transition-colors duration-300">
                     Erasmus KA1 courses
+                </a>
+            </li>
+            <li>
+                <a href="/src/pages/contactUs.php" 
+                   class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-tetra-green hover:bg-gray-700 rounded-md transition-colors duration-300">
+                    Contact Us
                 </a>
             </li>
         </ul>

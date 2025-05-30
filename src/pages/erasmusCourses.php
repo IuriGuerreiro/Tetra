@@ -24,6 +24,8 @@ $totalPracticals = $practicalController->getTotalPracticals();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erasmus KA1 Course Offerings - TETRA</title>
     <link rel="icon" type="image/png" href="https://tetra.com.mt/public/assets/images/favicon.png">
+
+    <meta name="description" content="Discover our comprehensive range of Erasmus KA1 training courses designed for professional development">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>

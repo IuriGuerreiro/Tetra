@@ -15,6 +15,8 @@ $cpds = $cpdController->getAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPD Sessions - TETRA</title>
     <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
+
+    <meta name="description" content="Discover our comprehensive range of CPD sessions designed for professional development">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>

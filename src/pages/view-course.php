@@ -24,6 +24,9 @@ $practicals = $subject ? $practicalController->getBySubjectId($id) : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Erasmus KA1 Course - TETRA</title>
+
+    <meta name="description" content="Explore the comprehensive details of this training course">
+    
     <link rel="icon" type="image/png" href="https://new.tetra.com.mt/public/assets/images/favicon.png">
     
     <!-- Tailwind CSS -->

@@ -16,6 +16,8 @@ $cpd = $id ? $cpdController->getById($id) : null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View CPD Session - TETRA</title>
     <link rel="icon" type="image/png" href="https://tetra.com.mt/public/assets/images/favicon.png">
+
+    <meta name="description" content="Explore the comprehensive details of this ELT Council-approved CPD session">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
